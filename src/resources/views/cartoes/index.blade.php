@@ -1,3 +1,7 @@
+<a href='{{ route('criar_cartoes') }}'>clique aqui para criar um cartao</a>
+
+<br>
+
 listagem dos cartoes
 
 @forelse ($cartoes as $cartao)

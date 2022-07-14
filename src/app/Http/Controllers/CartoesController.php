@@ -15,8 +15,10 @@ class CartoesController extends Controller
         $cartao->dia_fechamento = $request->input('dia_fechamento');
         $cartao->banco = $request->input('banco');
         $cartao->save();
+    }
 
-        return response()->json('sucesso! cartao criado.');
+    public function criar(){
+        return view('cartoes.criar');
     }
 
     public function index(){

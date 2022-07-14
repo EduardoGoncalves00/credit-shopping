@@ -21,4 +21,6 @@ Route::get('/', function () {
 
 Route::post('cartao', [CartoesController::class, 'store']);
 
-Route::get('cartoes', [CartoesController::class, 'index']);
+Route::get('cartoes', [CartoesController::class, 'index'])->name('cartoes');
+
+Route::get('criar_cartoes', [CartoesController::class, 'criar'])->name('criar_cartoes');
