@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartoesController;
 use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\ComprasController;
 use App\Models\Cartao;
 use Illuminate\Http\Request;
 
@@ -47,3 +48,14 @@ Route::delete('deletar_categorias/{id}', [CategoriasController::class, 'deletar'
 Route::get('editar_categorias/{id}', [CategoriasController::class, 'editar'])->name('editar_categorias');
 
 Route::put('atualizar_categorias/{id}', [CategoriasController::class, 'atualizar'])->name('atualizar_categorias');
+
+// compras
+Route::get('compras', [ComprasController::class, 'index'])->name('compras');
+
+Route::post('criar_compras', [ComprasController::class, 'criar'])->name('criar_compras');
+
+Route::delete('deletar_compras/{id}', [ComprasController::class, 'deletar'])->name('deletar_compras');
+
+Route::get('editar_compras/{id}', [ComprasController::class, 'editar'])->name('editar_compras');
+
+Route::put('atualizar_compras/{id}', [ComprasController::class, 'atualizar'])->name('atualizar_compras');
