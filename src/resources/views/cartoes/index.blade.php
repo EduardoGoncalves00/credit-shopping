@@ -1,5 +1,8 @@
 <a href='{{ route('criar_cartoes') }}'>clique aqui para criar um cartao</a>
 
+<a href='{{ route('lista') }}'>clique aqui para ir a lista de compras</a>
+
+
 <br>
 <br>
 

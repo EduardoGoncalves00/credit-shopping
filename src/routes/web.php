@@ -52,6 +52,9 @@ Route::put('atualizar_categorias/{id}', [CategoriasController::class, 'atualizar
 // compras
 Route::get('compras', [ComprasController::class, 'index'])->name('compras');
 
+Route::get('retornarcartoes', [ComprasController::class, 'retornarcartoes'])->name('retornarcartoes');
+
+
 Route::post('criar_compras', [ComprasController::class, 'criar'])->name('criar_compras');
 
 Route::delete('deletar_compras/{id}', [ComprasController::class, 'deletar'])->name('deletar_compras');
@@ -59,3 +62,12 @@ Route::delete('deletar_compras/{id}', [ComprasController::class, 'deletar'])->na
 Route::get('editar_compras/{id}', [ComprasController::class, 'editar'])->name('editar_compras');
 
 Route::put('atualizar_compras/{id}', [ComprasController::class, 'atualizar'])->name('atualizar_compras');
+
+Route::get('lista', [ComprasController::class, 'lista'])->name('lista');
+
+
+// relatorio
+Route::get('relatorios', [ComprasController::class, 'criarViewRelatorio'])->name('relatorios');
+
+Route::post('puxar_relatorio', [ComprasController::class, 'puxarRelatorios'])->name('puxar_relatorio');
+

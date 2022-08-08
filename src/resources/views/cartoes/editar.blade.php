@@ -1,5 +1,8 @@
 <a href='{{ route('cartoes') }}'>clique aqui para listar todos cartoes</a>
 
+<a href='{{ route('lista') }}'>clique aqui para ir a lista de compras</a>
+
+
 <H2>Edite o cartão!</H2>
 
 <form action="{{route('atualizar_cartoes', $cartao->id)}}" method="post">
@@ -29,3 +32,4 @@
 
     <button type="submit" class="btn btn-primary">Salvar novas alteracoes</button>
 </form>
+

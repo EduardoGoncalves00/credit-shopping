@@ -1,5 +1,7 @@
 <a href='{{ route('cartoes') }}'>clique aqui para listar todos cartoes</a>
 
+<a href='{{ route('lista') }}'>clique aqui para ir a lista de compras</a>
+
 
 <form action="{{route('criar_cartao')}}" method="POST">
     <br>

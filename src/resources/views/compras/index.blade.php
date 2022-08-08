@@ -8,17 +8,30 @@
     </div>
 
     <div class="form-group">
-        <input type="number" class="form-control" name="categoria_id" placeholder="categoria_id">
+        {{-- <input type="number" class="form-control" name="categoria_id" placeholder="categoria_id"> --}}
+
+        <select name="categoria_id">
+            <option value="">Selecione categoria_id</option>
+                @foreach ($categorias as $categoria)
+                    <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
+                @endforeach
+        </select>
     </div>
 
     <div class="form-group">
-        <input type="number" class="form-control" name="valor" placeholder="valor">
+        <input type="int" class="form-control" name="valor" placeholder="valor">
     </div>
 
     <div class="form-group">
-        <input type="number" class="form-control" name="cartao_id" placeholder="cartao_id">
-      </div>
-  
+        {{-- <input type="number" class="form-control" name="cartao_id" placeholder="cartao_id"> --}}
+    <select name="cartao_id">
+        <option value="">Selecione cartao_id</option>
+            @foreach ($cartoes as $cartao)
+                <option value="{{ $cartao->id }}">{{ $cartao->nome }}</option>
+            @endforeach
+    </select>
+    </div>
+ 
       <div class="form-group">
           <input type="date" class="form-control" name="data" placeholder="data">
       </div>
@@ -33,26 +46,4 @@
 
 <br>
 
-<h3>Lista de compras</h3>
-
-@forelse ($compras as $compra)
-
-    <li>
-        id: {{ $compra->id }} -  descricao: {{ $compra->descricao }} - categoria_id: {{ $compra->categoria_id }} - valor: {{ $compra->valor }} - cartao_id: {{ $compra->cartao_id }} - data: {{ $compra->data }} - usuario: {{ $compra->usuario }}
-
-        <form action="{{ route('deletar_compras', $compra->id) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-primary">Deletar</button>
-        </form>
-
-        <a href= '{{ route('editar_compras', $compra->id) }}' >Atualizar</a>
-
-    </li>
-    <br>
-
-@empty
-    nao tem compras
-@endforelse
-
-
+<a href='{{ route('lista') }}'>Ver lista de compras</a>

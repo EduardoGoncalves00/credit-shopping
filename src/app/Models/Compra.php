@@ -13,4 +13,16 @@ class Compra extends Model
     
     protected $guarded = [];
 
+    protected $dates = ['data'];
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class, 'categoria_id', 'id');
+    }
+
+    public function cartao()
+    {
+        return $this->belongsTo(Cartao::class, 'cartao_id', 'id');
+    }
+
 }
