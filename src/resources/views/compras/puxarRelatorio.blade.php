@@ -1,7 +1,7 @@
-@forelse ($dataEntre as $entre)
+@forelse ($relatorio as $relatorioPuxado)
 
     <li>
-        id: {{ $entre->id }} -  descricao: {{ $entre->descricao }} - categoria: {{ $entre->categoria->nome }} - valor: {{ $entre->valor }} - cartao: {{ $entre->cartao->nome }} - data: {{ $entre->data->format('d/m/y') }} - usuario: {{ $entre->usuario }}
+        id: {{ $relatorioPuxado->id }} -  descricao: {{ $relatorioPuxado->descricao }} - categoria: {{ $relatorioPuxado->categoria->nome }} - valor: {{ $relatorioPuxado->valor }} - cartao: {{ $relatorioPuxado->cartao->nome }} - data: {{ $relatorioPuxado->data->format('d/m/y') }} - usuario: {{ $relatorioPuxado->usuario }}
     </li>
 
     <br>

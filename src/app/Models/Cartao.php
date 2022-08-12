@@ -16,18 +16,36 @@ class Cartao extends Model
 
     protected $guarded = [];
 
+    public function compras()
+    {
+        return $this->hasMany(Compra::class, 'cartao_id', 'id');
+    }
+
     public function melhorDia():string
     {
-        $cartao = $this::select('dia_fechamento')->first();
-
-        return Carbon::createFromFormat('d', $cartao->dia_fechamento)->addDays(1)->format('d');
+        return Carbon::createFromFormat('d', $this->dia_fechamento)->addDays(1)->format('d');
     }
 
-    public function fatura()
+    public function itensFatura(string $dataFormulario)
     {
-        $mes = $this::select('data')->format('d');
+        $data = Carbon::createFromFormat('Y-m', $dataFormulario);
+        $mesAtual = $data->format('Y-m');
+        $mesAnterior = $data->subMonthsNoOverflow()->format('Y-m');
+       
+        $diaFechamento = $this->dia_fechamento;
+        $melhorDia = $this->melhorDia();
 
-        $ano = $this::select('data')->format('m');
+        return $this->compras()->whereBetween('data', [$mesAnterior."-".$melhorDia, $mesAtual."-".$diaFechamento])->get();
     }
 
+    public function totalFatura(string $dataFormulario)
+    {
+        $data = Carbon::createFromFormat('Y-m', $dataFormulario);
+        $mesAtual = $data->format('Y-m');
+        $mesAnterior = $data->subMonthsNoOverflow()->format('Y-m');
+        $diaFechamento = $this->dia_fechamento;
+        $melhorDia = $this->melhorDia();
+
+        return $this->compras()->whereBetween('data', [$mesAnterior."-".$melhorDia, $mesAtual."-".$diaFechamento])->sum('valor'); // faz o sum direto no banco (+ performatico)
+    }   
 }
