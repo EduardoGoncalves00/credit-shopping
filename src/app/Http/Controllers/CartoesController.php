@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AtualizarCartoesRequest;
+use App\Http\Requests\CriarCartoesRequest;
+use App\Http\Requests\PuxarRelatorioRequest;
 use Illuminate\Http\Request;
 use App\Models\Cartao;
 use Carbon\Carbon;
 
 class CartoesController extends Controller
 {
-    public function store(Request $request){
+    public function store(CriarCartoesRequest $request){
         
         $cartao = new Cartao;
         $cartao->nome = $request->input('nome');
@@ -46,7 +49,7 @@ class CartoesController extends Controller
         return view('cartoes.editar', ['cartao'=> $cartao]);
     }
 
-    public function atualizar(Request $request) {
+    public function atualizar(AtualizarCartoesRequest $request) {
         Cartao::findOrFail($request->id)->update($request->all());
 
         return redirect('cartoes');
@@ -64,7 +67,7 @@ class CartoesController extends Controller
         return view('compras.index', ['aa'=> $aa]);
     }
 
-    public function buscarFatura(Request $request)
+    public function buscarFatura(PuxarRelatorioRequest $request)
     {
         $cartao = Cartao::findOrFail($request->cartao_id);
                 
@@ -80,21 +83,4 @@ class CartoesController extends Controller
             'relatorio' => $relatorio
         ]);
     }
-
-    // public function editar($id){
-    //     $cartao = Cartao::findOrFail($id);
-
-    //     return view('cartoes.editar', ['cartao'=> $cartao]);
-    // }
-
-    // public function atualizar(Request $request, $id){
-    //     $cartao = Cartao::findOrFail($id);
-    //     $cartao->nome = $request->input('nome');
-    //     $cartao->dia_pagamento = $request->input('dia_pagamento');
-    //     $cartao->dia_fechamento = $request->input('dia_fechamento');
-    //     $cartao->banco = $request->input('banco');
-    //     $cartao->update();
-
-    //     return redirect('cartoes');
-    // }
 }

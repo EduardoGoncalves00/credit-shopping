@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CriarCategoriasRequest;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 class CategoriasController extends Controller
 {
-    public function criar(Request $request)
+    public function criar(CriarCategoriasRequest $request)
     {
         $categoria = new Categoria;
         $categoria->nome = $request->input('nome');

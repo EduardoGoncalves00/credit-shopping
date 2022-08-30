@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AtualizarComprasRequest;
+use App\Http\Requests\CriarComprasRequest;
 use App\Models\Cartao;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
@@ -20,7 +22,7 @@ class ComprasController extends Controller
         return view('compras.index', ['compras'=> $compras, 'cartoes'=> $cartoes, 'categorias'=> $categorias]);
     }
 
-    public function criar(Request $request)
+    public function criar(CriarComprasRequest $request)
     {
         $compra = new Compra;
         $compra->descricao = $request->input('descricao');
@@ -38,20 +40,22 @@ class ComprasController extends Controller
     {
         Compra::findOrFail($id)->delete();
 
-        return redirect('compras');
+        return redirect('lista');
     }
 
     public function editar($id)
     {
         $compra = Compra::findOrFail($id);
-        return view('compras.editar', ['compra'=> $compra]);
+        $categorias = Categoria::all();
+        $cartoes = Cartao::all();
+        return view('compras.editar', ['compra'=> $compra, 'categorias'=> $categorias, 'cartoes'=> $cartoes]);
     }
 
-    public function atualizar(Request $request)
+    public function atualizar(AtualizarComprasRequest $request)
     {
         Compra::findOrFail($request->id)->update($request->all());
 
-        return redirect('compras');
+        return redirect('lista');
     }
 
     public function lista()
