@@ -30,6 +30,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="{{ route('categorias') }}">Lista de categorias</a>
+                    <a class="dropdown-item" href="{{ route('criar_categoria') }}">Criar categoria</a>
                 </div>
             </li>
             </li>
