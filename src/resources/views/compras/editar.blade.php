@@ -17,17 +17,13 @@
                     {{$message}}
                 </div>
                 @enderror
-                <br>
             </div>
-
             <div class="form-group">
                 <label for="categoria_id" >Selecione a categoria</label>
-                <br>
                 <select class="form-control @error('categoria_id') is-invalid @enderror" name="categoria_id">
-                    <option value="">Categoria</option>
-                        @foreach ($categorias as $categoria)
-                            <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
-                        @endforeach
+                    @foreach ($categorias as $categoria)
+                        <option {{ ($categoria->id == $compra->categoria_id) ? 'selected' : '' }} value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
+                    @endforeach
                 </select>  
                 @error('categoria_id')
                 <div class="invalid-feedaback text-danger">
@@ -37,7 +33,6 @@
             </div>
 
             <div class="form-group">
-                <br>
                 <label for="valor" >Valor da compra</label>
                 <input value="{{ $compra->valor }}" type="money" class="form-control @error('valor') is-invalid @enderror" name="valor">
                 @error('valor')
@@ -46,15 +41,12 @@
                 </div>
                 @enderror
             </div>
-
             <div class="form-group">
-                <br>
                 <label for="cartao_id" >Selecione o cartão</label>
                 <select value="{{ $compra->cartao_id }}" class="form-control @error('cartao_id') is-invalid @enderror" name="cartao_id">
-                    <option value="">Cartão</option>
-                        @foreach ($cartoes as $cartao)
-                            <option value="{{ $cartao->id }}">{{ $cartao->nome }}</option>
-                        @endforeach
+                    @foreach ($cartoes as $cartao)
+                        <option {{ ($cartao->id == $compra->cartao_id) ? 'selected' : '' }} value="{{ $cartao->id }}">{{ $cartao->nome }}</option>
+                    @endforeach
                 </select>
                 @error('cartao_id')
                 <div class="invalid-feedaback text-danger">
@@ -62,11 +54,9 @@
                 </div>
                 @enderror
             </div>
-        
             <div class="form-group">
-                <br>
                 <label for="data" >Selecione uma data</label>
-                <input type="date" class="form-control @error('data') is-invalid @enderror" name="data">
+                <input value="{{ $compra->data->format('Y-m-d') }}" type="date" class="form-control @error('data') is-invalid @enderror" name="data">
                 @error('data')
                 <div class="invalid-feedaback text-danger">
                     {{$message}}
@@ -75,7 +65,6 @@
             </div>
         
             <div class="form-group">
-                <br>
                 <label for="usuario" >Nome de usuario</label>
                 <input value="{{ $compra->usuario }}" type="text" class="form-control @error('usuario') is-invalid @enderror" name="usuario" placeholder="Usuário">
                 @error('usuario')
@@ -83,13 +72,13 @@
                     {{$message}}
                 </div>
                 @enderror
-                <br>
             </div>
 
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Salvar alterações</button>
             </div>
 
+            <br>
         </form>
     </div>
 @endsection

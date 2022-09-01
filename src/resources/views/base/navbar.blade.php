@@ -6,7 +6,7 @@
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                COMPRAS
+                Compras
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="{{ route('lista') }}">Lista de compras</a>
@@ -16,7 +16,7 @@
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    CARTÕES
+                    Cartões
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="{{ route('cartoes') }}">Lista de cartões</a>
@@ -26,7 +26,7 @@
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    CATEGORIAS
+                    Categorias
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="{{ route('categorias') }}">Lista de categorias</a>

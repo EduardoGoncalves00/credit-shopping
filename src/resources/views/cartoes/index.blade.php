@@ -5,18 +5,18 @@
     <br>
     <table class="container w-75 table table-bordered">
 
-        <h4 class="card-title text-center">Listagem dos cartões</h4>
+        <h4 class="card-title text-center">Lista dos cartões</h4>
 
         @forelse ($cartoes as $cartao)
 
             <thead>
                 <tr>
-                    <th scope="col">Nome do cartão:</th>
-                    <th scope="col">Dia de pagamento:</th>
-                    <th scope="col">Dia do fechamento:</th>
-                    <th scope="col">Nome do banco:</th>
-                    <th scope="col">Atualizar</th>
-                    <th scope="col">Deletar</th>
+                    <th scope="col">Nome do cartão</th>
+                    <th scope="col">Dia de pagamento</th>
+                    <th scope="col">Dia do fechamento</th>
+                    <th scope="col">Nome do banco</th>
+                    <th class="text-center" scope="col">Atualizar</th>
+                    <th class="text-center" scope="col">Deletar</th>
                 </tr>
             </thead>
             <tbody>

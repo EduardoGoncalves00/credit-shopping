@@ -22,7 +22,7 @@
             <div class="form-group">
                 <label for="categoria_id" >Selecione a categoria</label>
                 <select class="form-control @error('categoria_id') is-invalid @enderror" name="categoria_id">
-                    <option value="">Categoria</option>
+                    <option disabled value="">Categoria</option>
                         @foreach ($categorias as $categoria)
                             <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
                         @endforeach
@@ -47,7 +47,7 @@
             <div class="form-group">
                 <label for="cartao_id" >Selecione o cartão</label>
                 <select class="form-control @error('cartao_id') is-invalid @enderror" name="cartao_id">
-                    <option value="">Cartão</option>
+                    <option disabled value="">Cartão</option>
                         @foreach ($cartoes as $cartao)
                             <option value="{{ $cartao->id }}">{{ $cartao->nome }}</option>
                         @endforeach

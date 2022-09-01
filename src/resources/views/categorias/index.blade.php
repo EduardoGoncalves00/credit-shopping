@@ -6,11 +6,11 @@
 
         <table class="container w-75 table table-bordered">
 
-            <h4 class="card-title text-center">Listagem de categorias</h4>
+            <h4 class="card-title text-center">Lista de categorias</h4>
 
                 <thead>
                     <tr>
-                        <th scope="col">Nome do cartão</th>
+                        <th scope="col">Categoria</th>
                         <th class="text-center" scope="col">Atualizar</th>
                         <th class="text-center" scope="col">Deletar</th>
                     </tr>

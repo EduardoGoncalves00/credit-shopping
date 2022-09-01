@@ -7,7 +7,6 @@
         <h4 class="card-title text-center">Edite o cartão!</h4>
 
         <form action="{{route('atualizar_cartoes', $cartao->id)}}" method="post">
-            <br>
             @csrf
             @method('PUT')
         
@@ -19,9 +18,7 @@
                     {{$message}}
                 </div>
                 @enderror
-            </div>
-                <br>
-        
+            </div>        
             <div class="form-group @error('dia_pagamento') is-invalid @enderror">
                 <label for="dia_pagamento" >Novo dia de pagamento</label>
                 <input type="number" class="form-control" value="{{ $cartao->dia_pagamento }}" name="dia_pagamento">
@@ -30,9 +27,7 @@
                     {{$message}}
                 </div>
                 @enderror
-            </div>
-                <br>
-        
+            </div>        
             <div class="form-group @error('dia_fechamento') is-invalid @enderror">
                 <label for="dia_fechamento" >Novo dia de fechamento</label>
                 <input type="number" class="form-control" value="{{ $cartao->dia_fechamento }}" name="dia_fechamento">
@@ -41,9 +36,7 @@
                     {{$message}}
                 </div>
                 @enderror
-            </div>
-                <br>
-        
+            </div>        
             <div class="form-group @error('banco') is-invalid @enderror">
                 <label for="banco" >Novo banco</label>
                 <input type="text" class="form-control" value="{{ $cartao->banco }}" name="banco">
@@ -53,11 +46,12 @@
                 </div>
                 @enderror
             </div>
-                <br>
 
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Salvar alterações</button>
             </div>
+
+            <br
         </form>
     </div>
 @endsection

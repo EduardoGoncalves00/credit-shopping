@@ -18,8 +18,8 @@
                         <th scope="col">Cartão</th>
                         <th scope="col">Data</th>
                         <th scope="col">Usuário</th>
-                        <th scope="col">Atualizar</th>
-                        <th scope="col">Deletar</th>
+                        <th class="text-center" scope="col">Atualizar</th>
+                        <th class="text-center" scope="col">Deletar</th>
                     </tr>
                 </thead>
                 <tbody>
