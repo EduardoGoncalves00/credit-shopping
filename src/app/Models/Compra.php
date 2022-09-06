@@ -17,12 +17,12 @@ class Compra extends Model
 
     public function categoria()
     {
-        return $this->belongsTo(Categoria::class, 'categoria_id', 'id');
+        return $this->belongsTo(Categoria::class, 'categoria_id', 'id')->withTrashed();
     }
 
     public function cartao()
     {
-        return $this->belongsTo(Cartao::class, 'cartao_id', 'id');
+        return $this->belongsTo(Cartao::class, 'cartao_id', 'id')->withTrashed();
     }
 
 }

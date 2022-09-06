@@ -6,8 +6,6 @@
           
         <table class="container w-75 table table-bordered">
 
-            @forelse ($compras as $compra)
-
                 <h4 class="card-title text-center">Lista de compras</h4>      
                
                 <thead>
@@ -23,11 +21,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @forelse ($compras as $compra)
+
                     <tr>
                         <td>{{ $compra->descricao }}</td>
                         <td>{{ $compra->categoria->nome }}</td>
                         <td>{{ $compra->valor }}</td>
-                        <td>{{ $compra->cartao->nome }}</td>
+                        <td>{{ $compra->cartao->nome}}</td>
                         <td>{{ $compra->data->format('d/m/y') }}</td>
                         <td>{{ $compra->usuario }}</td>
                         <td>       

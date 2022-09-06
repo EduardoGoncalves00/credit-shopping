@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('dia_pagamento');
             $table->integer('dia_fechamento');
             $table->string('banco');
+            $table->dateTime('deleted_at')->nullable();
         });
     }
 

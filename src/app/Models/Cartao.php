@@ -5,10 +5,13 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cartao extends Model
 {
     use HasFactory;
+
+    use SoftDeletes;
 
     public $timestamps = false;
 
@@ -18,7 +21,7 @@ class Cartao extends Model
 
     public function compras()
     {
-        return $this->hasMany(Compra::class, 'cartao_id', 'id');
+        return $this->hasMany(Compra::class, 'cartao_id', 'id')->withTrashed();
     }
 
     public function melhorDia():string

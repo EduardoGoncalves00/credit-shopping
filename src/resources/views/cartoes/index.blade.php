@@ -7,8 +7,6 @@
 
         <h4 class="card-title text-center">Lista dos cartões</h4>
 
-        @forelse ($cartoes as $cartao)
-
             <thead>
                 <tr>
                     <th scope="col">Nome do cartão</th>
@@ -20,6 +18,8 @@
                 </tr>
             </thead>
             <tbody>
+                @forelse ($cartoes as $cartao)
+
                 <tr>
                     <td>{{ $cartao->nome }}</td>
                     <td>{{ $cartao->dia_pagamento }}</td>
