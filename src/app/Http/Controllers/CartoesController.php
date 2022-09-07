@@ -14,13 +14,8 @@ class CartoesController extends Controller
 {
     public function store(CriarCartoesRequest $request){
         
-        $cartao = new Cartao;
-        $cartao->nome = $request->input('nome');
-        $cartao->dia_pagamento = $request->input('dia_pagamento');
-        $cartao->dia_fechamento = $request->input('dia_fechamento');
-        $cartao->banco = $request->input('banco');
-        $cartao->save();
-
+        $cartoesServices = new CartoesService();
+        $cartoesServices->criarCartao($request);
         return redirect('cartoes');
     }
 

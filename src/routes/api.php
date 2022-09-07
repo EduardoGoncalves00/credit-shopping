@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('cartoes', [CartoesController::class, 'index'])->name('cartoes_api');
+Route::post('criar_cartao', [CartoesController::class, 'store'])->name('criar_cartao_api');
