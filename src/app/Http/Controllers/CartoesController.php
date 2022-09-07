@@ -7,6 +7,7 @@ use App\Http\Requests\CriarCartoesRequest;
 use App\Http\Requests\PuxarRelatorioRequest;
 use Illuminate\Http\Request;
 use App\Models\Cartao;
+use App\Services\CartoesService;
 use Carbon\Carbon;
 
 class CartoesController extends Controller
@@ -28,7 +29,8 @@ class CartoesController extends Controller
     }
 
     public function index(){
-        $cartoes = Cartao::all();
+        $cartoesService = new CartoesService();
+        $cartoes = $cartoesService->buscaCartoes();
         return view('cartoes.index', ['cartoes'=> $cartoes]);
     }
 
