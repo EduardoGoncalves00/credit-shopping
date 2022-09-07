@@ -20,48 +20,29 @@ use Illuminate\Http\Request;
 
 // cartoes
 Route::get('cartoes', [CartoesController::class, 'index'])->name('cartoes');
-
 Route::get('criar_cartoes', [CartoesController::class, 'criar'])->name('criar_cartoes');
-
 Route::post('criar_cartao', [CartoesController::class, 'store'])->name('criar_cartao');
-
 Route::get('deletar_cartoes/{id}', [CartoesController::class, 'deletar'])->name('deletar_cartoes');
-
 Route::get('editar_cartoes/{id}', [CartoesController::class, 'editar'])->name('editar_cartoes');
-
 Route::put('atualizar_cartoes/{id}', [CartoesController::class, 'atualizar'])->name('atualizar_cartoes');
-
-Route::get('retornarcartoes', [CartoesController::class, 'retornarcartoes'])->name('retornarcartoes');
 
 // categorias
 Route::get('categorias', [CategoriasController::class, 'index'])->name('categorias');
-
 Route::post('criar_categorias', [CategoriasController::class, 'criar'])->name('criar_categorias');
-
 Route::get('criar_categoria', [CategoriasController::class, 'criarview'])->name('criar_categoria');
-
 Route::get('deletar_categorias/{id}', [CategoriasController::class, 'deletar'])->name('deletar_categorias');
-
 Route::get('editar_categorias/{id}', [CategoriasController::class, 'editar'])->name('editar_categorias');
-
 Route::put('atualizar_categorias/{id}', [CategoriasController::class, 'atualizar'])->name('atualizar_categorias');
 
 // compras
 Route::get('compras', [ComprasController::class, 'index'])->name('compras');
-
 Route::post('criar_compras', [ComprasController::class, 'criar'])->name('criar_compras');
-
 Route::get('deletar_compras/{id}', [ComprasController::class, 'deletar'])->name('deletar_compras');
-
 Route::get('editar_compras/{id}', [ComprasController::class, 'editar'])->name('editar_compras');
-
 Route::put('atualizar_compras/{id}', [ComprasController::class, 'atualizar'])->name('atualizar_compras');
-
 Route::get('lista', [ComprasController::class, 'lista'])->name('lista');
-
 
 // relatorio
 Route::get('relatorios', [CartoesController::class, 'criarViewRelatorio'])->name('relatorios');
-
 Route::post('puxar_relatorio', [CartoesController::class, 'buscarFatura'])->name('buscarFatura');
 

@@ -32,11 +32,6 @@ class CartoesController extends Controller
         return view('cartoes.index', ['cartoes'=> $cartoes]);
     }
 
-    public function indexparaform(){
-        $cartoes = Cartao::all();
-        return view('cartoes.index', ['cartoes'=> $cartoes]);
-    }
-
     public function deletar($id){
         Cartao::findOrFail($id)->delete();
 
@@ -59,12 +54,6 @@ class CartoesController extends Controller
     {
         $cartoes = Cartao::all();
         return view('compras.relatorios', ['cartoes'=> $cartoes]);
-    }
-
-    public function retornarcartoes()
-    {
-        $aa = Cartao::all();
-        return view('compras.index', ['aa'=> $aa]);
     }
 
     public function buscarFatura(PuxarRelatorioRequest $request)
