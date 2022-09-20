@@ -47,7 +47,7 @@ class ComprasController extends Controller
     {
         $comprasServices = new ComprasService();
         $compras = $comprasServices->index();
-        return view('compras.lista', ['compras' => $compras]);
+        return $compras;
     }
 
     public function editar($id)

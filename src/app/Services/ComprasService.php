@@ -44,14 +44,15 @@ class ComprasService
     {
         $cartoes = Cartao::all();
         $categorias = Categoria::all();
-        return view('compras.index', ['cartoes'=> $cartoes, 'categorias'=> $categorias]);
+        $compras = Compra::all();
+        return view('compras.index', ['compras'=> $compras, 'cartoes'=> $cartoes, 'categorias'=> $categorias]);
     }
 
     public function editar($id)
     {
-        $compra = Compra::findOrFail($id);
+        $compras = Compra::findOrFail($id);
         $categorias = Categoria::all();
         $cartoes = Cartao::all();
-        return view('compras.editar', ['compra'=> $compra, 'categorias'=> $categorias, 'cartoes'=> $cartoes]);
+        return view('compras.editar', ['compras'=> $compras, 'categorias'=> $categorias, 'cartoes'=> $cartoes]);
     }
 }

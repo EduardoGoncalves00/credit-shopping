@@ -4,8 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartoesController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\ComprasController;
-use App\Models\Cartao;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,31 +16,31 @@ use Illuminate\Http\Request;
 |
 */
 
-// cartoes
-Route::get('cartoes', [CartoesController::class, 'index'])->name('cartoes');
-Route::get('criar_cartoes', [CartoesController::class, 'criar'])->name('criar_cartoes');
-Route::post('criar_cartao', [CartoesController::class, 'store'])->name('criar_cartao');
-Route::get('deletar_cartoes/{id}', [CartoesController::class, 'deletar'])->name('deletar_cartoes');
-Route::get('editar_cartoes/{id}', [CartoesController::class, 'editar'])->name('editar_cartoes');
-Route::put('atualizar_cartoes/{id}', [CartoesController::class, 'atualizar'])->name('atualizar_cartoes');
+Route::controller(CartoesController::class)->group(function () {
+    Route::get('/cartoes', 'index')->name('cartoes');
+    Route::get('/criar_cartoes', 'criar')->name('criar_cartoes');
+    Route::post('/criar_cartao', 'store')->name('criar_cartao');
+    Route::get('/deletar_cartoes/{id}', 'deletar')->name('deletar_cartoes');
+    Route::get('/editar_cartoes/{id}', 'editar')->name('editar_cartoes');
+    Route::put('/atualizar_cartoes/{id}', 'atualizar')->name('atualizar_cartoes');
+    Route::get('/relatorios', 'criarViewRelatorio')->name('relatorios');
+    Route::post('/puxar_relatorio', 'buscarFatura')->name('buscarFatura');
+});
 
-// categorias
-Route::get('categorias', [CategoriasController::class, 'index'])->name('categorias');
-Route::post('criar_categorias', [CategoriasController::class, 'criar'])->name('criar_categorias');
-Route::get('criar_categoria', [CategoriasController::class, 'criarview'])->name('criar_categoria');
-Route::get('deletar_categorias/{id}', [CategoriasController::class, 'deletar'])->name('deletar_categorias');
-Route::get('editar_categorias/{id}', [CategoriasController::class, 'editar'])->name('editar_categorias');
-Route::put('atualizar_categorias/{id}', [CategoriasController::class, 'atualizar'])->name('atualizar_categorias');
+Route::controller(CategoriasController::class)->group(function () {
+    Route::get('/categorias', 'index')->name('categorias');
+    Route::post('/criar_categorias', 'criar')->name('criar_categorias');
+    Route::get('/criar_categoria', 'criarview')->name('criar_categoria');
+    Route::get('/deletar_categorias/{id}', 'deletar')->name('deletar_categorias');
+    Route::get('/editar_categorias/{id}', 'editar')->name('editar_categorias');
+    Route::put('/atualizar_categorias/{id}', 'atualizar')->name('atualizar_categorias');
+});
 
-// compras
-Route::get('compras', [ComprasController::class, 'index'])->name('compras');
-Route::post('criar_compras', [ComprasController::class, 'criar'])->name('criar_compras');
-Route::get('deletar_compras/{id}', [ComprasController::class, 'deletar'])->name('deletar_compras');
-Route::get('editar_compras/{id}', [ComprasController::class, 'editar'])->name('editar_compras');
-Route::put('atualizar_compras/{id}', [ComprasController::class, 'atualizar'])->name('atualizar_compras');
-Route::get('lista', [ComprasController::class, 'lista'])->name('lista');
-
-// relatorio
-Route::get('relatorios', [CartoesController::class, 'criarViewRelatorio'])->name('relatorios');
-Route::post('puxar_relatorio', [CartoesController::class, 'buscarFatura'])->name('buscarFatura');
-
+Route::controller(ComprasController::class)->group(function () {
+    Route::get('/compras', 'index')->name('compras');
+    Route::post('/criar_compras', 'criar')->name('criar_compras');
+    Route::get('/deletar_compras/{id}', 'deletar')->name('deletar_compras');
+    Route::get('/editar_compras/{id}', 'editar')->name('editar_compras');
+    Route::put('/atualizar_compras/{id}', 'atualizar')->name('atualizar_compras');
+    Route::get('/lista', 'lista')->name('lista');
+});
