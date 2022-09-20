@@ -21,7 +21,7 @@ class Cartao extends Model
 
     public function compras()
     {
-        return $this->hasMany(Compra::class, 'cartao_id', 'id')->withTrashed();
+        return $this->hasMany(Compra::class, 'cartao_id', 'id');
     }
 
     public function melhorDia():string

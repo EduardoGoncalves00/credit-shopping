@@ -8,60 +8,51 @@ use App\Models\Cartao;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\Compra;
+use App\Services\ComprasService;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\DB;
 
 class ComprasController extends Controller
 {
-    public function index()
+    public function lista()
     {
-        $compras = Compra::all();
-        $cartoes = Cartao::all();
-        $categorias = Categoria::all();
-        return view('compras.index', ['compras'=> $compras, 'cartoes'=> $cartoes, 'categorias'=> $categorias]);
+        $comprasServices = new ComprasService();
+        $compras = $comprasServices->lista();
+        return view('compras.lista', ['compras' => $compras]);
     }
-
+    
     public function criar(CriarComprasRequest $request)
     {
-        $compra = new Compra;
-        $compra->descricao = $request->input('descricao');
-        $compra->categoria_id = $request->input('categoria_id');
-        $compra->valor = $request->input('valor');
-        $compra->cartao_id = $request->input('cartao_id');
-        $compra->data = $request->input('data');
-        $compra->usuario = $request->input('usuario');
-        $compra->save();
-
+        $comprasServices = new ComprasService();
+        $comprasServices->criar($request);
         return redirect('lista');
     }
 
     public function deletar($id)
     {
-        Compra::findOrFail($id)->delete();
-
+        $comprasServices = new ComprasService();
+        $comprasServices->deletar($id);
         return redirect('lista');
+    }
+
+    public function atualizar(AtualizarComprasRequest $id)
+    {
+        $comprasServices = new ComprasService();
+        $comprasServices->atualizar($id);
+        return redirect('lista');
+    }
+
+    public function index()
+    {
+        $comprasServices = new ComprasService();
+        $compras = $comprasServices->index();
+        return view('compras.lista', ['compras' => $compras]);
     }
 
     public function editar($id)
     {
-        $compra = Compra::findOrFail($id);
-        $categorias = Categoria::all();
-        $cartoes = Cartao::all();
-        return view('compras.editar', ['compra'=> $compra, 'categorias'=> $categorias, 'cartoes'=> $cartoes]);
-    }
-
-    public function atualizar(AtualizarComprasRequest $request)
-    {
-        Compra::findOrFail($request->id)->update($request->all());
-
-        return redirect('lista');
-    }
-
-    public function lista()
-    {
-        $compras = Compra::all();
-
-        return view('compras.lista', ['compras' => $compras]);
+        $comprasServices = new ComprasService();
+        return $comprasServices->editar($id);
     }
 }

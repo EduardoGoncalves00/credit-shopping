@@ -2,48 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CriarCategoriasRequest;
+use App\Http\Requests\CriarAtualizarCategoriasRequest;
 use App\Models\Categoria;
+use App\Services\CategoriasService;
 use Illuminate\Http\Request;
 
 class CategoriasController extends Controller
 {
-    public function criar(CriarCategoriasRequest $request)
+    public function criar(CriarAtualizarCategoriasRequest $request)
     {
-        $categoria = new Categoria;
-        $categoria->nome = $request->input('nome');
-        $categoria->save();
-
+        $categoriasService = new CategoriasService();
+        $categoriasService->criar($request);
         return redirect('categorias');
     }
 
-    public function criarview(){
-        return view('categorias.criar');
+    public function atualizar(CriarAtualizarCategoriasRequest $id)
+    {
+        $categoriasServices = new CategoriasService();
+        $categoriasServices->atualizar($id);
+        return redirect('categorias');
+}
+
+    public function deletar($id)
+    {
+        $categoriasService = new CategoriasService();
+        $categoriasService->deletar($id);
+        return redirect('categorias');
     }
 
     public function index()
     {
-        $categoria = Categoria::all();
+        $categoriasService = new CategoriasService();
+        $categoria = $categoriasService->index();
         return view('categorias.index', ['categoria'=> $categoria]);
     }
 
-    public function deletar($id)
-    {
-        Categoria::findOrFail($id)->delete();
-
-        return redirect('categorias');
+    public function criarview(){
+        $categoriasService = new CategoriasService();
+        $categoriasService->criarview();
+        return view('categorias.criar');
     }
 
     public function editar($id)
     {
-        $categoria = Categoria::findOrFail($id);
+        $categoriasService = new CategoriasService();
+        $categoria = $categoriasService->editar($id);
         return view('categorias.editar', ['categoria'=> $categoria]);
-    }
-
-    public function atualizar(Request $request)
-    {
-        Categoria::findOrFail($request->id)->update($request->all());
-
-        return redirect('categorias');
     }
 }
