@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AtualizarComprasRequest;
 use App\Http\Requests\CriarComprasRequest;
 use App\Services\ComprasService;
-use Illuminate\Http\Request;
 
 class ComprasController extends Controller
 {
@@ -24,17 +23,17 @@ class ComprasController extends Controller
         return response()->json(['success' => true]);       
     }
 
-    public function deletar($id)
-    {
-        $comprasServices = new ComprasService();
-        $comprasServices->deletar($id);
-        return response()->json(['success' => true]);       
-    }
-
     public function atualizar(AtualizarComprasRequest $request)
     {
         $comprasServices = new ComprasService();
         $comprasServices->atualizar($request);
+        return response()->json(['success' => true]);       
+    }
+
+    public function deletar($id)
+    {
+        $comprasServices = new ComprasService();
+        $comprasServices->deletar($id);
         return response()->json(['success' => true]);       
     }
 }

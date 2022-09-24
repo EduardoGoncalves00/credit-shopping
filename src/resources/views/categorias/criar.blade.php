@@ -6,7 +6,7 @@
     <div class="card container w-25">
         <h4 class="card-title text-center">Criar categoria</h4>
 
-        <form action="{{route('criar_categorias')}}" method="POST">
+        <form action="{{route('store_category')}}" method="POST">
           @csrf
           <div class="form-group @error('nome') is-invalid @enderror">
             <label for="nome" >Nome da categoria</label>

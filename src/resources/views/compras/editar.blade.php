@@ -6,7 +6,7 @@
     <div class="card container w-25 " >
         <h4 class="card-title text-center">Atualizar a compra</h4>
 
-        <form action="{{route('atualizar_compras', $compra->id)}}" method="post">
+        <form action="{{route('update_shopping', $compra->id)}}" method="post">
             @csrf
             @method('PUT')
             <div class="form-group">

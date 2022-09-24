@@ -6,7 +6,7 @@
 <div class="card container w-25">
     <h4 class="card-title text-center">Criar cartão</h4>
 
-    <form action="{{route('criar_cartao')}}" method="POST">
+    <form action="{{route('store_card')}}" method="POST">
         @csrf
         <div class="form-group @error('nome') is-invalid @enderror">
             <label for="nome" >Nome do cartão</label>

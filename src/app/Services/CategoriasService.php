@@ -7,13 +7,6 @@ use App\Models\Categoria;
 
 class CategoriasService
 {
-    public function criar(CriarAtualizarCategoriasRequest $request)
-    {
-        $categoria = new Categoria();
-        $categoria->nome = $request->input('nome');
-        $categoria->save();
-    }
-
     public function index($withTrashed = false)
     {
         if ($withTrashed == true){
@@ -23,23 +16,31 @@ class CategoriasService
         return Categoria::all();
     }  
 
-    public function deletar($id)
+    public function create()
     {
-        $categoria = Categoria::findOrFail($id)->delete();
-        return $categoria;
+        return view('categorias.criar');
     }
 
-    public function atualizar($request)
+    public function store(CriarAtualizarCategoriasRequest $request)
     {
-        Categoria::findOrFail($request->id)->update($request->all());
+        $categoria = new Categoria();
+        $categoria->nome = $request->input('nome');
+        $categoria->save();
     }
 
-    public function editar($id)
+    public function edit($id)
     {
         return Categoria::findOrFail($id);
     }
 
-    public function criarview(){
-        return view('categorias.criar');
+    public function update($request)
+    {
+        Categoria::findOrFail($request->id)->update($request->all());
+    }
+
+    public function destroy($id)
+    {
+        $categoria = Categoria::findOrFail($id)->delete();
+        return $categoria;
     }
 }

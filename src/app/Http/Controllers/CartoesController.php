@@ -5,79 +5,60 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AtualizarCartoesRequest;
 use App\Http\Requests\CriarCartoesRequest;
 use App\Http\Requests\PuxarRelatorioRequest;
-use Illuminate\Http\Request;
-use App\Models\Cartao;
 use App\Services\CartoesService;
-use Carbon\Carbon;
 
 class CartoesController extends Controller
 {
-    public function store(CriarCartoesRequest $request)
-    {
-        $cartoesServices = new CartoesService();
-        $cartoesServices->criarCartao($request);
-        return redirect('cartoes');
-    }
-
-    public function criar()
-    {
-        $cartoesServices = new CartoesService();
-        return $cartoesServices->criar();
-    }
-
     public function index()
     {
         $cartoesService = new CartoesService();
-        $cartoes = $cartoesService->buscaCartoes();
+        $cartoes = $cartoesService->index();
         return view('cartoes.index', ['cartoes'=> $cartoes]);
     }
 
-    public function deletar($id)
+    public function create()
     {
         $cartoesServices = new CartoesService();
-        $cartoesServices->deletar($id);
-        return redirect('cartoes');
+        return $cartoesServices->create();
     }
 
-    public function editar($id)
+    public function store(CriarCartoesRequest $request)
     {
         $cartoesServices = new CartoesService();
-        return $cartoesServices->editar($id);
+        $cartoesServices->store($request);
+        return redirect('cards');
     }
 
-    public function atualizar(AtualizarCartoesRequest $id)
+    public function edit($id)
     {
         $cartoesServices = new CartoesService();
-        $cartoesServices->atualizar($id);
-        return redirect('cartoes');
+        return $cartoesServices->edit($id);
     }
 
-    public function criarViewRelatorio()
+    public function update(AtualizarCartoesRequest $id)
     {
         $cartoesServices = new CartoesService();
-        return $cartoesServices->criarViewRelatorio();
+        $cartoesServices->update($id);
+        return redirect('cards');
     }
 
-    public function buscarFatura(PuxarRelatorioRequest $request)
+    public function destroy($id)
+    {
+        $cartoesServices = new CartoesService();
+        $cartoesServices->destroy($id);
+        return redirect('cards');
+    }
+
+    // views
+    public function viewInvoice(PuxarRelatorioRequest $request)
     {
         $cartoesService = new CartoesService();
-        return $cartoesService->buscarFatura($request);
+        return $cartoesService->viewInvoice($request);
     }
 
-    // public function buscarFatura(PuxarRelatorioRequest $request)
-    // {
-    //     $cartao = Cartao::findOrFail($request->cartao_id);
-                
-    //     $mesSelecionado = Carbon::createFromFormat('Y-m', $request->data)->format('m');
-      
-    //     $relatorio = $cartao->itensFatura($request->data);
-    //     $total = $cartao->totalFatura($request->data);
-        
-    //     return view('compras.puxarRelatorio', [
-    //         'diaPagamento' => $cartao->dia_pagamento,
-    //         'somenteMesAtualSelecionado' => $mesSelecionado,
-    //         'somaFatura' => $total,
-    //         'relatorio' => $relatorio
-    //     ]);
-    // }
+    public function viewInvoiceSearch()
+    {
+        $cartoesServices = new CartoesService();
+        return $cartoesServices->viewInvoiceSearch();
+    }
 }

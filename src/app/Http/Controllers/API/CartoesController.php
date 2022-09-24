@@ -6,10 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AtualizarCartoesRequest;
 use App\Http\Requests\CriarCartoesRequest;
 use App\Http\Requests\PuxarRelatorioRequest;
-use App\Models\Cartao;
 use App\Services\CartoesService;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class CartoesController extends Controller
 {
@@ -27,18 +24,18 @@ class CartoesController extends Controller
         return response()->json(['success' => true]);       
     }
 
-    public function deletar($id)
-    {
-        $cartoesServices = new CartoesService();
-        $cartoesServices->deletar($id);
-        return response()->json(['success' => true]);       
-    }
-
     public function atualizar(AtualizarCartoesRequest $request)
     {
         $cartoesServices = new CartoesService();
         $cartoesServices->atualizar($request);
         return response()->json(['success' => true]);
+    }
+    
+    public function deletar($id)
+    {
+        $cartoesServices = new CartoesService();
+        $cartoesServices->deletar($id);
+        return response()->json(['success' => true]);       
     }
 
     public function buscarFatura(PuxarRelatorioRequest $request)

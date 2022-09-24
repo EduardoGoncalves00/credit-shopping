@@ -6,7 +6,7 @@
     <div class="card container w-25">
         <h4 class="card-title text-center">Criar uma compra</h4>
 
-        <form action="{{route('criar_compras')}}" method="POST">
+        <form action="{{route('store_shopping')}}" method="POST">
             @csrf
 
             <div class="form-group">

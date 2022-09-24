@@ -6,7 +6,7 @@
     <div class="card container w-25 " >
         <h4 class="card-title text-center">Edite o cartão!</h4>
 
-        <form action="{{route('atualizar_cartoes', $cartao->id)}}" method="post">
+        <form action="{{route('update_card', $cartao->id)}}" method="post">
             @csrf
             @method('PUT')
         

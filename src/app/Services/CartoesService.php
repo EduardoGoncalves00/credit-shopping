@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class CartoesService
 {
-    public function buscaCartoes($withTrashed = false)
+    public function index($withTrashed = false)
     {
         if ($withTrashed == true){
             return Cartao::withTrashed()->get();
@@ -17,12 +17,12 @@ class CartoesService
         return Cartao::all();
     }
 
-    public function criar()
+    public function create()
     {
         return view('cartoes.criar');
     }
 
-    public function criarCartao($request)
+    public function store($request)
     {    
         $cartao = new Cartao;
         $cartao->nome = $request->input('nome');
@@ -32,41 +32,41 @@ class CartoesService
         $cartao->save();
     }
 
-    public function editar($id)
+    public function edit($id)
     {
         $cartao = Cartao::findOrFail($id);
         return view('cartoes.editar', ['cartao'=> $cartao]);
     }
 
-    public function deletar($id)
+    public function destroy($id)
     {
         Cartao::findOrFail($id)->delete();
     }
     
-    public function atualizar($request)
+    public function update($request)
     {
         Cartao::findOrFail($request->id)->update($request->all());
     }
 
-    public function criarViewRelatorio()
+    public function viewInvoiceSearch()
     {
         $cartoes = Cartao::all();
         return view('compras.relatorios', ['cartoes'=> $cartoes]);
     }
 
-    public function buscarFatura(PuxarRelatorioRequest $request)
+    public function viewInvoice(PuxarRelatorioRequest $request)
     {
         $cartao = Cartao::findOrFail($request->cartao_id);
-        $mesSelecionado = Carbon::createFromFormat('Y-m', $request->data)->format('m');
+        $somenteMesAtualSelecionado = Carbon::createFromFormat('Y-m', $request->data)->format('m');
         $relatorio = $cartao->itensFatura($request->data);
         $total = $cartao->totalFatura($request->data);
         
         return view('compras.puxarRelatorio', [
                     'diaPagamento' => $cartao->dia_pagamento,
-                    'somenteMesAtualSelecionado' => $mesSelecionado,
+                    'somenteMesAtualSelecionado' => $somenteMesAtualSelecionado,
                     'somaFatura' => $total,
                     'relatorio' => $relatorio
                 ]);
-        // return ["Cartão selecionado" => $cartao, "Mês selecionado" => $mesSelecionado, "Valor total" => $total, $relatorio,];
+        // return [$cartao, $somenteMesAtualSelecionado, $total, $relatorio,];
     }
 }

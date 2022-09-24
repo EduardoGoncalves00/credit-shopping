@@ -9,9 +9,9 @@
                 Compras
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="{{ route('lista') }}">Lista de compras</a>
-                <a class="dropdown-item" href="{{ route('compras') }}">Criar compra</a>
-                <a class="dropdown-item" href="{{ route('relatorios') }}">Relatório</a>
+                <a class="dropdown-item" href="{{ route('list_shopping') }}">Lista de compras</a>
+                <a class="dropdown-item" href="{{ route('view_create_shopping') }}">Criar compra</a>
+                <a class="dropdown-item" href="{{ route('viewInvoicesearch') }}">Relatório</a>
             </div>
 
             <li class="nav-item dropdown">
@@ -19,8 +19,8 @@
                     Cartões
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{{ route('cartoes') }}">Lista de cartões</a>
-                    <a class="dropdown-item" href="{{ route('criar_cartoes') }}">Criar cartão</a>
+                    <a class="dropdown-item" href="{{ route('cards') }}">Lista de cartões</a>
+                    <a class="dropdown-item" href="{{ route('view_create_card') }}">Criar cartão</a>
                 </div>
             </li>
 
@@ -29,8 +29,8 @@
                     Categorias
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{{ route('categorias') }}">Lista de categorias</a>
-                    <a class="dropdown-item" href="{{ route('criar_categoria') }}">Criar categoria</a>
+                    <a class="dropdown-item" href="{{ route('categories') }}">Lista de categorias</a>
+                    <a class="dropdown-item" href="{{ route('view_create_category') }}">Criar categoria</a>
                 </div>
             </li>
             </li>

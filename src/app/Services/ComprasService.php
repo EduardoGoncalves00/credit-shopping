@@ -10,13 +10,21 @@ use App\Models\Compra;
 
 class ComprasService
 {
-    public function lista()
+    public function index()
     {
         $compras = Compra::all();
         return $compras;
     }
 
-    public function criar(CriarComprasRequest $request)
+    public function create()
+    {
+        $cartoes = Cartao::all();
+        $categorias = Categoria::all();
+        $compras = Compra::all();
+        return view('compras.index', ['compras'=> $compras, 'cartoes'=> $cartoes, 'categorias'=> $categorias]);
+    }
+
+    public function store(CriarComprasRequest $request)
     {
         $compra = new Compra;
         $compra->descricao = $request->input('descricao');
@@ -28,31 +36,23 @@ class ComprasService
         $compra->save();
     }
 
-    public function deletar($id)
+    public function edit($id)
     {
-        $compras = Compra::findOrFail($id)->delete();
-        return $compras;
+        $compra = Compra::findOrFail($id);
+        $categorias = Categoria::all();
+        $cartoes = Cartao::all();
+        return view('compras.editar', ['compra'=> $compra, 'categorias'=> $categorias, 'cartoes'=> $cartoes]);
     }
 
-    public function atualizar(AtualizarComprasRequest $request)
+    public function update(AtualizarComprasRequest $request)
     {
         $compras = Compra::findOrFail($request->id)->update($request->all());
         return $compras;
     }
 
-    public function index()
+    public function destroy($id)
     {
-        $cartoes = Cartao::all();
-        $categorias = Categoria::all();
-        $compras = Compra::all();
-        return view('compras.index', ['compras'=> $compras, 'cartoes'=> $cartoes, 'categorias'=> $categorias]);
-    }
-
-    public function editar($id)
-    {
-        $compras = Compra::findOrFail($id);
-        $categorias = Categoria::all();
-        $cartoes = Cartao::all();
-        return view('compras.editar', ['compras'=> $compras, 'categorias'=> $categorias, 'cartoes'=> $cartoes]);
+        $compras = Compra::findOrFail($id)->delete();
+        return $compras;
     }
 }
