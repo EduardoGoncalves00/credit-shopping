@@ -15,24 +15,24 @@ class CategoriasController extends Controller
         return $categorias;
     }
 
-    public function criar(CriarAtualizarCategoriasRequest $request)
+    public function store(CriarAtualizarCategoriasRequest $request)
     {
         $categoriasService = new CategoriasService();
-        $categoriasService->criar($request);
+        $categoriasService->store($request);
         return response()->json(['success' => true]); 
     }
 
-    public function atualizar(CriarAtualizarCategoriasRequest $request)
+    public function update(CriarAtualizarCategoriasRequest $request)
     {
         $categoriasServices = new CategoriasService();
-        $categoriasServices->atualizar($request);
+        $categoriasServices->update($request);
         return response()->json(['success' => true]);
     }
 
-    public function deletar($id)
+    public function destroy($id)
     {
         $categoriasServices = new CategoriasService();
-        $categoriasServices->deletar($id);
+        $categoriasServices->destroy($id);
         return response()->json(['success' => true]);
     }
 }

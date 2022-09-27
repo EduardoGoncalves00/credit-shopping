@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class CartoesService
 {
-    public function index($withTrashed = false)
+    public function index($withTrashed = true)
     {
         if ($withTrashed == true){
             return Cartao::withTrashed()->get();
@@ -54,19 +54,14 @@ class CartoesService
         return view('compras.relatorios', ['cartoes'=> $cartoes]);
     }
 
-    public function viewInvoice(PuxarRelatorioRequest $request)
+    public function viewInvoice($request)
     {
         $cartao = Cartao::findOrFail($request->cartao_id);
-        $somenteMesAtualSelecionado = Carbon::createFromFormat('Y-m', $request->data)->format('m');
-        $relatorio = $cartao->itensFatura($request->data);
-        $total = $cartao->totalFatura($request->data);
-        
-        return view('compras.puxarRelatorio', [
-                    'diaPagamento' => $cartao->dia_pagamento,
-                    'somenteMesAtualSelecionado' => $somenteMesAtualSelecionado,
-                    'somaFatura' => $total,
-                    'relatorio' => $relatorio
-                ]);
-        // return [$cartao, $somenteMesAtualSelecionado, $total, $relatorio,];
+        return [
+            'diaPagamento' => $cartao->dia_pagamento,
+            'somenteMesAtualSelecionado' => Carbon::createFromFormat('Y-m', $request->data)->format('m'),
+            'fatura' => $cartao->itensFatura($request->data),
+            'totalFatura' => $cartao->totalFatura($request->data),
+        ];
     }
 }

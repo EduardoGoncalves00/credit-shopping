@@ -49,11 +49,17 @@ class CartoesController extends Controller
         return redirect('cards');
     }
 
-    // views
     public function viewInvoice(PuxarRelatorioRequest $request)
     {
         $cartoesService = new CartoesService();
-        return $cartoesService->viewInvoice($request);
+        $fatura = $cartoesService->viewInvoice($request);
+        
+        return view('compras.puxarRelatorio', [
+                    'diaPagamento' => $fatura['diaPagamento'],
+                    'somenteMesAtualSelecionado' => $fatura['somenteMesAtualSelecionado'],
+                    'totalFatura' => $fatura['totalFatura'],
+                    'fatura' => $fatura['fatura']
+        ]);
     }
 
     public function viewInvoiceSearch()

@@ -13,34 +13,34 @@ class CartoesController extends Controller
     public function index()
     {
         $cartoesService = new CartoesService();
-        $cartoes = $cartoesService->buscaCartoes();
+        $cartoes = $cartoesService->index();
         return $cartoes;
     }
 
     public function store(CriarCartoesRequest $request)
     {
         $cartoesServices = new CartoesService();
-        $cartoesServices->criarCartao($request);
+        $cartoesServices->store($request);
         return response()->json(['success' => true]);       
     }
 
-    public function atualizar(AtualizarCartoesRequest $request)
+    public function update(AtualizarCartoesRequest $request)
     {
         $cartoesServices = new CartoesService();
-        $cartoesServices->atualizar($request);
+        $cartoesServices->update($request);
         return response()->json(['success' => true]);
     }
     
-    public function deletar($id)
+    public function destroy($id)
     {
         $cartoesServices = new CartoesService();
-        $cartoesServices->deletar($id);
+        $cartoesServices->destroy($id);
         return response()->json(['success' => true]);       
     }
 
-    public function buscarFatura(PuxarRelatorioRequest $request)
+    public function viewInvoice(PuxarRelatorioRequest $request)
     {
-        $cartoesService = new CartoesService();
-        return $cartoesService->buscarFatura($request);
+        $cartoesService = new CartoesService();  
+        return $cartoesService->viewInvoice($request);
     }
 }

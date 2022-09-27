@@ -9,31 +9,31 @@ use App\Services\ComprasService;
 
 class ComprasController extends Controller
 {
-    public function lista()
+    public function index()
     {
         $comprasServices = new ComprasService();
-        $compras = $comprasServices->lista();
+        $compras = $comprasServices->index();
         return $compras;
     }
 
-    public function criar(CriarComprasRequest $request)
+    public function store(CriarComprasRequest $request)
     {
         $comprasServices = new ComprasService();
-        $comprasServices->criar($request);
+        $comprasServices->store($request);
         return response()->json(['success' => true]);       
     }
 
-    public function atualizar(AtualizarComprasRequest $request)
+    public function update(AtualizarComprasRequest $request)
     {
         $comprasServices = new ComprasService();
-        $comprasServices->atualizar($request);
+        $comprasServices->update($request);
         return response()->json(['success' => true]);       
     }
 
-    public function deletar($id)
+    public function destroy($id)
     {
         $comprasServices = new ComprasService();
-        $comprasServices->deletar($id);
+        $comprasServices->destroy($id);
         return response()->json(['success' => true]);       
     }
 }

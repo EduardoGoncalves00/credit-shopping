@@ -21,18 +21,18 @@
                 <div class="invalid-feedaback text-danger">
                     <h4 class="card-title text-center">Fatura do mes: {{$somenteMesAtualSelecionado}}</h4>  
                     <h4 class="card-title text-center">Vencimento no dia: {{$diaPagamento}}</h4> 
-                    <h4 class="card-title text-center">Valor total da fatura: R$ {{$somaFatura}}</h4>      
+                    <h4 class="card-title text-center">Valor total da fatura: R$ {{$totalFatura}}</h4>      
                     <br>
                 </div>
-
-                @forelse ($relatorio as $relatorioPuxado)
+             
+                @forelse ($fatura as $faturaPuxada)
                     <tr>
-                        <td>{{ $relatorioPuxado->descricao }}</td>
-                        <td>{{ $relatorioPuxado->categoria->nome }}</td>
-                        <td>{{ $relatorioPuxado->valor }}</td>
-                        <td>{{ $relatorioPuxado->cartao->nome }}</td>
-                        <td>{{ $relatorioPuxado->data->format('d/m/y') }}</td>
-                        <td>{{ $relatorioPuxado->usuario }}</td>
+                        <td>{{ $faturaPuxada->descricao }}</td>
+                        <td>{{ $faturaPuxada->categoria->nome }}</td>
+                        <td>{{ $faturaPuxada->valor }}</td>
+                        <td>{{ $faturaPuxada->cartao->nome }}</td>
+                        <td>{{ $faturaPuxada->data->format('d/m/y') }}</td>
+                        <td>{{ $faturaPuxada->usuario }}</td>
                     </tr>  
                 @empty
                     <h4 class="card-title text-center">Não hà relatorio nesse periodo.</h4>      
