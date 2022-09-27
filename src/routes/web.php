@@ -16,6 +16,14 @@ use App\Http\Controllers\ComprasController;
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
 Route::controller(CartoesController::class)->group(function () {
     Route::get('/cards', 'index')->name('cards');
     Route::get('/view_create_card', 'create')->name('view_create_card');
@@ -44,3 +52,5 @@ Route::controller(ComprasController::class)->group(function () {
     Route::put('/update_shopping/{id}', 'update')->name('update_shopping');
     Route::get('/destroy_compras/{id}', 'destroy')->name('destroy_compras');
 });
+
+require __DIR__.'/auth.php';
