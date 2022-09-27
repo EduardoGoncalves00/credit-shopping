@@ -17,11 +17,6 @@ class CartoesService
         return Cartao::all();
     }
 
-    public function create()
-    {
-        return view('cartoes.criar');
-    }
-
     public function store($request)
     {    
         $cartao = new Cartao;
@@ -48,13 +43,13 @@ class CartoesService
         Cartao::findOrFail($request->id)->update($request->all());
     }
 
-    public function viewInvoiceSearch()
+    public function showInvoiceSearch()
     {
         $cartoes = Cartao::all();
         return view('compras.relatorios', ['cartoes'=> $cartoes]);
     }
 
-    public function viewInvoice($request)
+    public function showInvoice($request)
     {
         $cartao = Cartao::findOrFail($request->cartao_id);
         return [

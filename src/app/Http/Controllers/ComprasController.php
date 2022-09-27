@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AtualizarComprasRequest;
 use App\Http\Requests\CriarComprasRequest;
+use App\Models\Cartao;
+use App\Models\Categoria;
+use App\Models\Compra;
 use App\Services\ComprasService;
 
 
@@ -18,9 +21,10 @@ class ComprasController extends Controller
 
     public function create()
     {
-        $comprasServices = new ComprasService();
-        $compras = $comprasServices->create();
-        return $compras;
+        $cartoes = Cartao::all();
+        $categorias = Categoria::all();
+        $compras = Compra::all();
+        return view('compras.index', ['compras'=> $compras, 'cartoes'=> $cartoes, 'categorias'=> $categorias]);
     }
     
     public function store(CriarComprasRequest $request)

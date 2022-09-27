@@ -14,9 +14,8 @@ class CategoriasController extends Controller
         return view('categorias.index', ['categoria'=> $categoria]);
     }
 
-    public function create(){
-        $categoriasService = new CategoriasService();
-        $categoriasService->create();
+    public function create()
+    {
         return view('categorias.criar');
     }
 

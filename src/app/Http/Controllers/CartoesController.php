@@ -18,8 +18,7 @@ class CartoesController extends Controller
 
     public function create()
     {
-        $cartoesServices = new CartoesService();
-        return $cartoesServices->create();
+        return view('cartoes.criar');
     }
 
     public function store(CriarCartoesRequest $request)
@@ -49,10 +48,10 @@ class CartoesController extends Controller
         return redirect('cards');
     }
 
-    public function viewInvoice(PuxarRelatorioRequest $request)
+    public function showInvoice(PuxarRelatorioRequest $request)
     {
         $cartoesService = new CartoesService();
-        $fatura = $cartoesService->viewInvoice($request);
+        $fatura = $cartoesService->showInvoice($request);
         
         return view('compras.puxarRelatorio', [
                     'diaPagamento' => $fatura['diaPagamento'],
@@ -62,9 +61,9 @@ class CartoesController extends Controller
         ]);
     }
 
-    public function viewInvoiceSearch()
+    public function showInvoiceSearch()
     {
         $cartoesServices = new CartoesService();
-        return $cartoesServices->viewInvoiceSearch();
+        return $cartoesServices->showInvoiceSearch();
     }
 }

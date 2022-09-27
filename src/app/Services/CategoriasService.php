@@ -16,11 +16,6 @@ class CategoriasService
         return Categoria::all();
     }  
 
-    public function create()
-    {
-        return view('categorias.criar');
-    }
-
     public function store(CriarAtualizarCategoriasRequest $request)
     {
         $categoria = new Categoria();

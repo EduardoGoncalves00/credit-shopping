@@ -6,7 +6,7 @@
 
     <div class="card container w-25">
 
-      <form action="{{route('viewInvoice')}}" method="POST">
+      <form action="{{route('showInvoice')}}" method="POST">
 
         <br>
 

@@ -10,8 +10,8 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="{{ route('list_shopping') }}">Lista de compras</a>
-                <a class="dropdown-item" href="{{ route('view_create_shopping') }}">Criar compra</a>
-                <a class="dropdown-item" href="{{ route('viewInvoicesearch') }}">Relatório</a>
+                <a class="dropdown-item" href="{{ route('show_create_shopping') }}">Criar compra</a>
+                <a class="dropdown-item" href="{{ route('showInvoicesearch') }}">Relatório</a>
             </div>
 
             <li class="nav-item dropdown">
@@ -20,7 +20,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="{{ route('cards') }}">Lista de cartões</a>
-                    <a class="dropdown-item" href="{{ route('view_create_card') }}">Criar cartão</a>
+                    <a class="dropdown-item" href="{{ route('show_create_card') }}">Criar cartão</a>
                 </div>
             </li>
 
@@ -30,9 +30,25 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="{{ route('categories') }}">Lista de categorias</a>
-                    <a class="dropdown-item" href="{{ route('view_create_category') }}">Criar categoria</a>
+                    <a class="dropdown-item" href="{{ route('show_create_category') }}">Criar categoria</a>
                 </div>
             </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ Auth::user()->name }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <x-dropdown-link :href="route('logout')"
+                                onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                            Sair
+                        </x-dropdown-link>
+                    </form>
+                </div>
             </li>
         </ul>
     </div>

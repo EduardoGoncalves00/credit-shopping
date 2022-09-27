@@ -16,14 +16,6 @@ class ComprasService
         return $compras;
     }
 
-    public function create()
-    {
-        $cartoes = Cartao::all();
-        $categorias = Categoria::all();
-        $compras = Compra::all();
-        return view('compras.index', ['compras'=> $compras, 'cartoes'=> $cartoes, 'categorias'=> $categorias]);
-    }
-
     public function store(CriarComprasRequest $request)
     {
         $compra = new Compra;

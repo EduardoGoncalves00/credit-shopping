@@ -41,6 +41,6 @@ class CartoesController extends Controller
     public function viewInvoice(PuxarRelatorioRequest $request)
     {
         $cartoesService = new CartoesService();  
-        return $cartoesService->viewInvoice($request);
+        return $cartoesService->showInvoice($request);
     }
 }
