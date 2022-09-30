@@ -38,7 +38,7 @@ class Cartao extends Model
         $diaFechamento = $this->dia_fechamento;
         $melhorDia = $this->melhorDia();
 
-        return $this->compras()->whereBetween('data', [$mesAnterior."-".$melhorDia, $mesAtual."-".$diaFechamento])->get();
+        return $this->compras()->whereBetween('data', [$mesAnterior."-".$melhorDia, $mesAtual."-".$diaFechamento])->get()->orderBy('data');
     }
 
     public function totalFatura(string $dataFormulario)
