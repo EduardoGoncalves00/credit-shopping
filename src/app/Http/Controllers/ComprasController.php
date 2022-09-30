@@ -9,7 +9,6 @@ use App\Models\Categoria;
 use App\Models\Compra;
 use App\Services\ComprasService;
 
-
 class ComprasController extends Controller
 {
     public function index()
@@ -31,7 +30,7 @@ class ComprasController extends Controller
     {
         $comprasServices = new ComprasService();
         $comprasServices->store($request);
-        return redirect('list_shopping');
+        return redirect('/');
     }
 
     public function edit($id)
@@ -44,13 +43,13 @@ class ComprasController extends Controller
     {
         $comprasServices = new ComprasService();
         $comprasServices->update($id);
-        return redirect('list_shopping');
+        return redirect('/');
     }
 
     public function destroy($id)
     {
         $comprasServices = new ComprasService();
         $comprasServices->destroy($id);
-        return redirect('list_shopping');
+        return redirect('/');
     }
 }
