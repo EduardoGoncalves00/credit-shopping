@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_logado');
             $table->string('descricao');
             $table->integer('categoria_id');
             $table->decimal('valor');

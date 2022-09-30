@@ -65,7 +65,7 @@
             </div>
         
             <div class="form-group">
-                <label for="usuario" >Nome de usuario</label>
+                <label for="usuario" >Nome do comprador</label>
                 <input value="{{ $compra->usuario }}" type="text" class="form-control @error('usuario') is-invalid @enderror" name="usuario" placeholder="Usuário">
                 @error('usuario')
                 <div class="invalid-feedaback text-danger">

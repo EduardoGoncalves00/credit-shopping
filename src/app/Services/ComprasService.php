@@ -7,18 +7,22 @@ use App\Http\Requests\CriarComprasRequest;
 use App\Models\Cartao;
 use App\Models\Categoria;
 use App\Models\Compra;
+use Illuminate\Support\Facades\Auth;
 
 class ComprasService
 {
     public function index()
     {
-        $compras = Compra::all();
+        $compras = Compra::orderByDesc('data')->paginate(20);
         return $compras;
     }
 
     public function store(CriarComprasRequest $request)
     {
+        $id = Auth::user()->id;
+
         $compra = new Compra;
+        $compra->id_logado = $id;
         $compra->descricao = $request->input('descricao');
         $compra->categoria_id = $request->input('categoria_id');
         $compra->valor = $request->input('valor');
