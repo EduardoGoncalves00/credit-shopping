@@ -24,7 +24,7 @@
                 <h4 class="card-title text-center">Valor total da fatura: R$ {{$totalFatura}}</h4>      
             
                 <div class="card-title text-center">
-                    <a href="/pdf" class="btn btn-info">PDF</a>
+                    <a href= '{{ route('pdf', [$cartao_id, $data]) }}' class="btn btn-info">PDF</a>
                 </div>
             </div>
             

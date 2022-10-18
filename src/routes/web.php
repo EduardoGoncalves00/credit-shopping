@@ -25,6 +25,7 @@ Route::controller(CartoesController::class)->middleware(['auth'])->group(functio
     Route::put('/update_card/{id}', 'update')->name('update_card');
     Route::get('/showInvoicesearch', 'showInvoicesearch')->name('showInvoicesearch');
     Route::post('/showInvoice', 'showInvoice')->name('showInvoice');
+    Route::get('/pdf/{cartao_id}/{data_selecionada}', 'gerarPdf')->name('pdf');
 });
 
 Route::controller(CategoriasController::class)->middleware(['auth'])->group(function () {

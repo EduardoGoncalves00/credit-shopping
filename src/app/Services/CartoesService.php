@@ -52,6 +52,7 @@ class CartoesService
     public function showInvoice($request)
     {
         $cartao = Cartao::findOrFail($request->cartao_id);
+
         return [
             'diaPagamento' => $cartao->dia_pagamento,
             'somenteMesAtualSelecionado' => Carbon::createFromFormat('Y-m', $request->data)->format('m'),

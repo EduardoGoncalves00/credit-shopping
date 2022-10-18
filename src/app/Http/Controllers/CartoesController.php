@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AtualizarCartoesRequest;
 use App\Http\Requests\CriarCartoesRequest;
 use App\Http\Requests\PuxarRelatorioRequest;
+use App\Models\Cartao;
 use App\Services\CartoesService;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CartoesController extends Controller
 {
@@ -52,12 +54,14 @@ class CartoesController extends Controller
     {
         $cartoesService = new CartoesService();
         $fatura = $cartoesService->showInvoice($request);
-        
+
         return view('compras.puxarRelatorio', [
                     'diaPagamento' => $fatura['diaPagamento'],
                     'somenteMesAtualSelecionado' => $fatura['somenteMesAtualSelecionado'],
                     'totalFatura' => $fatura['totalFatura'],
-                    'fatura' => $fatura['fatura']
+                    'fatura' => $fatura['fatura'],
+                    'cartao_id' => $request->cartao_id,
+                    'data' => $request->data,
         ]);
     }
 
@@ -65,5 +69,25 @@ class CartoesController extends Controller
     {
         $cartoesServices = new CartoesService();
         return $cartoesServices->showInvoiceSearch();
+    }
+
+    public function gerarPdf($cartao_id, $data_selecionada)
+    {
+        $array = ['cartao_id' => $cartao_id, 'data' => $data_selecionada];
+        $objeto = (object)$array;
+
+        $cartoesService = new CartoesService();
+
+        $fatura = $cartoesService->showInvoice($objeto);
+    
+        $pdf = PDF::loadView('compras.puxarRelatorio', [
+                            'diaPagamento' => $fatura['diaPagamento'],
+                            'somenteMesAtualSelecionado' => $fatura['somenteMesAtualSelecionado'],
+                            'totalFatura' => $fatura['totalFatura'],
+                            'fatura' => $fatura['fatura'],
+                            'cartao_id' => $cartao_id,
+                            'data' => $data_selecionada]);
+        
+        return $pdf->setPaper('a4')->stream('relatorio.pdf');
     }
 }

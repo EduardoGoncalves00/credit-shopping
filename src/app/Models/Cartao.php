@@ -19,16 +19,37 @@ class Cartao extends Model
 
     protected $guarded = [];
 
+    /*
+        
+    */
     public function compras()
     {
         return $this->hasMany(Compra::class, 'cartao_id', 'id');
     }
 
+    /*
+        retorna o melhor dia de compra
+
+        o metodo é obrigado a retornar algo do tipo string
+        ele retorna um objeto carbon para manipular a data, indo na tabela cartao, na coluna dia_fechamento e resgatando a data, apos isso adiciona um dia a mais e formata para retornar somente o dia
+    */
     public function melhorDia():string
     {
         return Carbon::createFromFormat('d', $this->dia_fechamento)->addDays(1)->format('d');
     }
 
+    /*
+        retorna as compras da data selecionada apartir do melhor dia de compra ate o dia do fechamento do cartao no mes selecionado
+
+        ele recebe uma data (exemplo: 2022-06) no formato string. apos ele criou um objeto carbon para manipular como data, 
+        formatando para uma data do tipo Y-m, tambem resgatando o mes anterior dessa data (enviada) com format.
+        resgata o dia de fechamento (dia_fechamento) na tabela cartao, do cartao escolhido
+        acessa o method melhorDia() para resgatar o melhor dia para compra
+        acessa o relacionamento compras deste cartao
+        onde as compras estao entre o dia fechamento e melhor dia usando como referencia a coluna data do banco
+        fazendo uma ordenecao decrescente, resgatando a data mais recente primeiro ate as mais antiga da tabela
+        retornando uma colecao (objeto) de objetos de compras 
+    */
     public function itensFatura(string $dataFormulario)
     {
         $data = Carbon::createFromFormat('Y-m', $dataFormulario);
@@ -38,7 +59,7 @@ class Cartao extends Model
         $diaFechamento = $this->dia_fechamento;
         $melhorDia = $this->melhorDia();
 
-        return $this->compras()->whereBetween('data', [$mesAnterior."-".$melhorDia, $mesAtual."-".$diaFechamento])->get()->orderBy('data');
+        return $this->compras()->whereBetween('data', [$mesAnterior."-".$melhorDia, $mesAtual."-".$diaFechamento])->get()->sortByDesc('data');
     }
 
     public function totalFatura(string $dataFormulario)
