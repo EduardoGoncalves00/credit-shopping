@@ -62,11 +62,15 @@ class Cartao extends Model
         return $this->compras()->whereBetween('data', [$mesAnterior."-".$melhorDia, $mesAtual."-".$diaFechamento])->get()->sortByDesc('data');
     }
 
+    /*
+        retorna as compras da data selecionada apartir do melhor dia de compra ate o dia do fechamento do cartao no mes selecionado, filtrando a coluna 'valor' e somando os valores contidos nela
+    */
     public function totalFatura(string $dataFormulario)
     {
         $data = Carbon::createFromFormat('Y-m', $dataFormulario);
         $mesAtual = $data->format('Y-m');
         $mesAnterior = $data->subMonthsNoOverflow()->format('Y-m');
+
         $diaFechamento = $this->dia_fechamento;
         $melhorDia = $this->melhorDia();
 
