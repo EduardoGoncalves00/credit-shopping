@@ -155,7 +155,7 @@ class CartoesController extends Controller
                             'diaPagamento' => $fatura['diaPagamento'],
                             'somenteMesAtualSelecionado' => $fatura['somenteMesAtualSelecionado'],
                             'totalFatura' => $fatura['totalFatura'],
-                            'fatura' => $fatura['fatura']->sortbydesc(),
+                            'fatura' => $fatura['fatura'],
                             'cartao_id' => $cartao_id,
                             'data' => $data_selecionada]);
         
