@@ -16,7 +16,11 @@ class Compra extends Model
     protected $dates = ['data'];
 
     /*
-        o metodo faz com que o categoria_id da tabela de compras, faça pertencer ao id de categoria, ate mesmo com as categorias apagadas
+        o metodo retorna o model da categoria com base no campo categoria_id tabela de compras, 
+        ate mesmo se a categoria estiver apagada
+
+        belongsTo = pertence a
+        exemplo: uma compra possui uma categoria
     */
     public function categoria()
     {
@@ -24,7 +28,11 @@ class Compra extends Model
     }
 
     /*
-        o metodo faz com que o cartao_id da tabela de compras, faça pertencer ao id de cartao, ate mesmo com os cartoes apagados
+        o metodo retorna a model cartao com base no campo cartao_id da tabela de compra,
+        ate mesmo se o cartao for apagado
+        
+        belongsTo = pertence a
+        exemplo: uma compra possui um cartao
     */
     public function cartao()
     {

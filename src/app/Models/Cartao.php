@@ -20,7 +20,20 @@ class Cartao extends Model
     protected $guarded = [];
 
     /*
+        retorna todas as compras do cartao
+        retorna um array contendo 0 ou mais objetos de compras
+
+        hasMany = tem muitos
+        exemplo: 
+        cartao = 2
+
+        compra | descricao | cartao_id 
+        53     | sapato    | 2 
+        61     | roupa     | 2
         
+        nesse exemplo no cartao de id 2, ao chamar o metodo compras retornaria um array com dois objetos de compras
+
+
     */
     public function compras()
     {
