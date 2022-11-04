@@ -12,11 +12,11 @@ use Barryvdh\DomPDF\Facade\Pdf;
 class CartoesController extends Controller
 {
     /*
-        retorna a view index de cartoes, enviando uma variavel a ela 
+        buscando todos os cartoes 
 
-        crio uma variavel chamada cartoesService e nela armazeno a instancia da service de cartoes
-        crio uma variavel chamada cartoes e nela armazeno a variavel cartoesService que esta acessando o metodo index da service
-        retorna a view index enviando a variavel cartoes a ela  
+        crio uma variavel chamada $cartoesService e nela armazeno a instancia da service de cartoes
+        crio uma variavel chamada $cartoes e nela armazeno o resultado do metodo index da classe CartoesService
+        retorna a view index enviando a variavel cartoes a ela 
     */
     public function index()
     {
@@ -26,9 +26,9 @@ class CartoesController extends Controller
     }
 
     /*
-        retorna a view criar
+        retorna uma pagina para a criacao de cartoes
 
-        retorna uma view criar
+        retorna a view criar, de cartoes
     */
     public function create()
     {
@@ -36,10 +36,11 @@ class CartoesController extends Controller
     }
 
     /*
-        retorna um (redirect) redirecao, chamando a rota cards
+        salvar um novo cartao 
 
         o metodo valida os campos atraves da request (CriarCartoesRequest) e é obrigado a receber uma $request
-        na variavel cartoesServices acessos o metodo store da service e envio a $request pro metodo na service
+        instancio uma classe da cartoes services
+        em cartoesServices acesso o metodo store da service e envio a $request pro metodo na service
         retorno um redirect acessando a rota chamada cards
     */
     public function store(CriarCartoesRequest $request)
@@ -50,38 +51,42 @@ class CartoesController extends Controller
     }
 
     /*
-        retorna o metodo edit (da service), passando o $request (mas somente o id, pois o laravel entende que $id eu quero apenas o id) para a service
+        retorna uma tela para editar o cartao
 
-        crio uma variavel chamada cartoesService e nela armazeno a instancia da service de cartoes
-        retorna a varivel cartoesServices acessando o metodo edit da service e envio o request pro metodo na service
+        obrigatorio receber um parametro $id
+        instanciado a classe CartoesService
+        crio uma variavel chamada $cartao e nela armazeno o resultado do metodo edit 
+        que foi chamado passando o id, da classe CartoesService
+        retorna uma view passando a variavel cartao
     */
     public function edit($id)
     {
         $cartoesServices = new CartoesService();
-        return $cartoesServices->edit($id);
+        $cartao = $cartoesServices->edit($id);
+        return view('cartoes.editar', ['cartao'=> $cartao]);
     }
 
     /*
-        retorna uma (redirect) redirecao acessando a rota 
+        atualizo o cartao no banco de dados
 
         o metodo valida os campos atraves da request (AtualizarCartoesRequest) e é obrigado a receber uma $request 
-        crio uma variavel chamada cartoesService e nela armazeno a instancia da service de cartoes
-        na variavel cartoesServices acessos o metodo update da service e envio a $request (id) pro metodo na service
+        crio uma variavel chamada $cartoesService e nela armazeno a instancia da service de cartoes
+        acesso o metodo update da service, armazenando o resultado do metodo
         retorna um redirect acessando a rota chamada cards
     */
-    public function update(AtualizarCartoesRequest $id)
+    public function update(AtualizarCartoesRequest $request)
     {
         $cartoesServices = new CartoesService();
-        $cartoesServices->update($id);
+        $cartoesServices->update($request);
         return redirect('cards');
     }
 
     /*
-        retorna uma (redirect) redirecao acessando a rota
+        deleta o cartao
 
         o metodo é obrigado a receber uma $request (id)
-        crio uma variavel chamada cartoesService e nela armazeno a instancia da service de cartoes
-        na variavel cartoesServices acessos o metodo destroy e envio a $request (id) pro metodo na service
+        crio uma variavel chamada $cartoesService e nela armazeno o instancia da service de cartoes
+        na variavel cartoesServices acessos o resultado do metodo destroy
         retorna um redirect acessando a rota chamada cards
     */
     public function destroy($id)
@@ -92,12 +97,27 @@ class CartoesController extends Controller
     }
 
     /*
-        retorna uma view, enviando um array com propriedades que acessam a variavel fatura e buscam da service, e outras duas que acessam o request
+        retorna a pagina para buscar o relatorio
+
+        crio uma variavel chamada $cartoesService e nela armazeno a instancia da service de cartoes
+        armazena a variavel cartoes que acessa o resultado do metodo showInvoiceSearch na service
+        retorno uma view passando a variavel $cartoes
+    */
+    public function showInvoiceSearch()
+    {
+        $cartoesServices = new CartoesService();
+        $cartoes = $cartoesServices->showInvoiceSearch();
+        return view('compras.relatorios', ['cartoes'=> $cartoes]);
+    }
+
+    /*
+        retorna o relatorio num periodo e cartao especifico 
         
         o metodo valida os campos atraves da request (PuxarRelatorioRequest) e é obrigado a receber uma $request
-        crio uma variavel chamada cartoesService e nela armazeno a instancia da service de cartoes
-        crio uma variavel $fatura e nela armazeno a variavel $cartoesService que esta acessando o metodo showInvoice e passando o $request
-        retorno a view puxarRelatorio passando um array com propriedades que acessam a variavel $fatura e acessa a propriedade, e tambem resgata o request e setam a propriedade
+        crio uma variavel chamada $cartoesService e nela armazeno a instancia da service de cartoes
+        crio uma variavel $fatura e nela armazeno o resultado do metodo showInvoice
+        retorno a view puxarRelatorio, passando um array com os indices que acessam a variavel $fatura e acessa o indice do array, 
+        e tambem devolve informacoes do $request encaminhadas como parametro
     */
     public function showInvoice(PuxarRelatorioRequest $request)
     {
@@ -115,32 +135,15 @@ class CartoesController extends Controller
     }
 
     /*
-        retorna um metodo da service
+        retorna um pdf do relatorio
 
-        crio uma variavel chamada cartoesService e nela armazeno a instancia da service de cartoes
-        retorno a variavel cartoesServices que acessa o metodo showInvoiceSearch na service
-    */
-    public function showInvoiceSearch()
-    {
-        $cartoesServices = new CartoesService();
-        return $cartoesServices->showInvoiceSearch();
-    }
-
-    /*
-        metodo retorna um pdf da view relatorioPdf
-
-        o metodo recebe $cartao_id, que é o cartao que foi selecionado no relatorio, e a $data_selecionada que foi o periodo que foi escolhido
-        o array se torna um objeto
+        o metodo recebe dois parametros, $cartao_id, que é o cartao que foi selecionado no relatorio, e a $data_selecionada que foi o periodo que foi escolhido
+        criei um array com os dois parametros
+        convertido o array para um objeto
         e instanciado a service de cartoes na variavel $cartoesService
-        e criado a variavel $fatura para trazer o metodo shoInvoice e levar os dois parametro (cartao_id e data_selecionada) 
-        sera carregado o pdf na view relatorioPdf 
-        sera resgatado do metodo showInvoice o diaPagamento
-        sera resgatado do metodo showInvoice o somenteMesAtualSelecionado
-        sera resgatado do metodo showInvoice o totalFatura
-        sera resgatado do metodo showInvoice o fatura
-        sera resgatado da variavel recebida $cartao_id
-        sera resgatado da variavel recebida $data_selecionada
-        retornado um pdf no formato a4 na horizontal com nome de 'relatorio.pdf'
+        e criado a variavel $fatura para trazer o resultado do metodo shoInvoice e levar a variavel $objeto 
+        criado a variavel $pdf que armazenara o resultado da funcao loadview da classe PDF
+        retornado um pdf no formato A4 na horizontal com nome de 'relatorio.pdf'
     */
     public function gerarPdf($cartao_id, $data_selecionada)
     {

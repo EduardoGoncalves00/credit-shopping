@@ -11,8 +11,9 @@ class CartoesService
     /*
         o metodo retorna todas os cartoes. caso withTrashed for true devolve os apagados tambem
 
-        o metodo tem a variavel withTrashed com valor true
-        ele faz um if, caso a variavel esteja false ele retorna todos os cartoes, mas caso seja true ele retornarar todos os cartoes juntamente com os deletados
+        o metodo tem o parametro withTrashed com valor padrao true
+        ele faz um if, caso a variavel esteja true ele retorna todos os cartoes inclusive os deletados, 
+        mas caso seja false ele retornarar apenas os cartoes nao deletados
     */
     public function index($withTrashed = true)
     {
@@ -24,15 +25,15 @@ class CartoesService
     }
 
     /*
-        salva no banco os resultados enviados pela request
+        salva no banco os dados enviados para esses metodos
         
-        o metodo e obrigatorio uma request
-        a variavel $cartao é instanciada, virando a model cartao
-        na variavel é chamada a coluna nome do banco, onde vai ser armazenado o request com a propriedade chamada nome
-        na variavel é chamada a coluna dia_pagamento do banco, onde vai ser armazenado o request com a propriedade chamada dia_pagamento
-        na variavel é chamada a coluna dia_fechamento do banco, onde vai ser armazenado o request com a propriedade chamada dia_fechamento
-        na variavel é chamada a coluna chamada banco do banco, onde vai ser armazenado o request com a propriedade chamada banco
-        e chamado o metodo save, onde vai salvar essas informacoes imputadas no banco
+        o metodo tem um parametro obrigatório $request
+        a classe Cartao é instanciada, armazenando na variavel $cartao
+        armazena na propriedade nome, o conteudo que foi enviado no campo nome da $request
+        armazena na propriedade dia_pagamento, o conteudo que foi enviado no campo dia_pagamento da $request
+        armazena na propriedade dia_fechamento, o conteudo que foi enviado no campo dia_fechamento da $request
+        armazena na propriedade banco, o conteudo que foi enviado no campo banco da $request
+        chamado o metodo save, onde vai salvar essas informacoes imputadas no banco
     */
     public function store($request)
     {    
@@ -53,30 +54,30 @@ class CartoesService
     */
     public function edit($id)
     {
-        $cartao = Cartao::findOrFail($id);
-        return view('cartoes.editar', ['cartao'=> $cartao]);
+        return Cartao::findOrFail($id);
+    }
+    
+    /*
+        atualiza o conteudo no banco, conforme o id recebido
+
+        o metodo e obrigado a receber uma $request
+        recebe o $request passado, procura no banco pelo id passado na request
+        atualiza no banco com todas as propriedades passadas pelo $request
+    */
+    public function update($request)
+    {
+        Cartao::findOrFail($request->id)->update($request->all());
     }
 
     /*
         deleta o conteudo no banco, conforme o id recebido
 
-        o metodo e obrigado a receber uma $request (id)
-        recebe o id passado na request, procura no banco por um igual e deleta ele do banco
+        o metodo e obrigado a receber um $id
+        recebe o id passado por parametro, procura no banco por um igual e deleta ele do banco
     */
     public function destroy($id)
     {
         Cartao::findOrFail($id)->delete();
-    }
-    
-    /*
-        atualia o conteudo no banco, conforme o id recebido
-
-        o metodo e obrigado a receber uma $request (id)
-        recebe o $request passado. procura no banco pelo id passado na request, atualiza no banco com todas as infos passadas no $request
-    */
-    public function update($request)
-    {
-        Cartao::findOrFail($request->id)->update($request->all());
     }
 
     /*
@@ -87,8 +88,7 @@ class CartoesService
     */
     public function showInvoiceSearch()
     {
-        $cartoes = Cartao::all();
-        return view('compras.relatorios', ['cartoes'=> $cartoes]);
+        return Cartao::all();
     }
 
     /*
