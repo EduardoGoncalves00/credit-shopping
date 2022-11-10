@@ -9,10 +9,10 @@ use App\Services\CategoriasService;
 class CategoriasController extends Controller
 {
     /*
-        retorna o metodo index da categoriasService
+        busca todas as categorias
 
-        crio uma variavel chamda categoriasService e nela armazeno a instancia da service de categorias
-        crio uma variavel chamada categorias e nela armazeno a variavel categoriasService que esta acessando o metodo index da service
+        crio uma variavel chamada $categoriasService e nela armazeno a instancia da service de categorias
+        crio uma variavel chamada $categorias e nela armazeno o resultado do metodo index da classe CategoriasService
         retorno a variavel categorias
     */
     public function index()
@@ -23,11 +23,12 @@ class CategoriasController extends Controller
     }
 
     /*
-        retorna uma resposta json de sucesso quando acessa o metodo store da service, e nao reclama de problema
+        salva uma nova categoria 
 
-        metodo obrigado a validar pela request e receber uma $request
-        na variavel categoriasService acessos o metodo store da service e envio a $request pro metodo na service
-        retorna um json apos o envio da $request pra service 
+        o metodo valida os campos atraves da request (CriarAtualizarCategoriasRequest) e é obrigado a receber uma $request
+        instancio uma classe da CategoriasService
+        em $categoriasService acesso o metodo store da service e envio a $request pro metodo na service
+        retorna uma resposta em json
     */
     public function store(CriarAtualizarCategoriasRequest $request)
     {
@@ -37,11 +38,12 @@ class CategoriasController extends Controller
     }
 
     /*
-        retorna uma resposta json de sucesso quando acessa o metodo store da service, e nao reclama de problema
+        atualizo a categoria no banco de dados
 
-        metodo obrigado a validar pela request e receber uma $request
-        na variavel categoriasService acessos o metodo update da service e envio a $request pro metodo na service
-        retorna um json apos o envio da $request pra service
+        o metodo valida os campos atraves da request (CriarAtualizarCategoriasRequest) e é obrigado a receber uma $request 
+        crio uma variavel chamada $categoriasServices e nela armazeno a instancia da service de categorias
+        acesso o metodo update da service, armazenando o resultado do metodo
+        retorna uma resposta em json
     */
     public function update(CriarAtualizarCategoriasRequest $request)
     {
@@ -50,12 +52,13 @@ class CategoriasController extends Controller
         return response()->json(['success' => true]);
     }
 
-    /*
-        retorna uma resposta json de sucesso quando acessa o metodo store da service, e nao reclama de problema
+     /*
+        deleta a categoria
 
-        metodo e obrigado a receber um id ($request)
-        na variavel categoriasService acessos o metodo destroy da service e envio a $request pro metodo na service
-        retorna um json apos o envio da $request pra service
+        o metodo é obrigado a receber uma $request (id)
+        crio uma variavel chamada $categoriasServices e nela armazeno o instancia da service de categorias
+        na variavel categoriasServices acessos o resultado do metodo destroy
+        retorna uma resposta em json
     */
     public function destroy($id)
     {

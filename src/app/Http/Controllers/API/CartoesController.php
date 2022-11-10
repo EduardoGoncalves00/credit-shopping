@@ -11,10 +11,10 @@ use App\Services\CartoesService;
 class CartoesController extends Controller
 {
     /*
-        retorna o metodo index da CartoesService
+        busca todos os cartoes
 
-        crio uma variavel chamda CartoesService e nela armazeno a instancia da service de cartoes
-        crio uma variavel chamada cartoes e nela armazeno a variavel CartoesService que esta acessando o metodo index da service
+        crio uma variavel chamada $cartoesService e nela armazeno a instancia da service de cartoes
+        crio uma variavel chamada $cartoes e nela armazeno o resultado do metodo index da classe CartoesService
         retorno a variavel cartoes
     */
     public function index()
@@ -25,12 +25,12 @@ class CartoesController extends Controller
     }
 
     /*
-        retorna uma resposta json de sucesso quando acessa o metodo store da service, e nao reclama de problema
+        salva um novo cartao 
 
-        metodo obrigado a validar pela request e receber uma $request
-        crio uma variavel chamada cartoesService e nela armazeno a instancia da service de cartoes
-        na variavel cartoesServices acessos o metodo store da service e envio a $request pro metodo na service
-        retorna um json apos o envio da $request pra service 
+        o metodo valida os campos atraves da request (CriarCartoesRequest) e é obrigado a receber uma $request
+        instancio uma classe da cartoes services
+        em $cartoesServices acesso o metodo store da service e envio a $request pro metodo na service
+        retorna uma resposta em json
     */
     public function store(CriarCartoesRequest $request)
     {
@@ -40,12 +40,12 @@ class CartoesController extends Controller
     }
 
     /*
-        retorna uma resposta json de sucesso quando acessa o metodo update da service, e nao reclama de problema
+         atualizo o cartao no banco de dados
 
-        metodo obrigado a validar pela request e receber uma $request
-        crio uma variavel chamada cartoesService e nela armazeno a instancia da service de cartoes
-        na variavel cartoesServices acessos o metodo update da service e envio a $request pro metodo na service
-        retorna um json apos o envio da $request pra service 
+        o metodo valida os campos atraves da request (AtualizarCartoesRequest) e é obrigado a receber uma $request 
+        crio uma variavel chamada $cartoesServices e nela armazeno a instancia da service de cartoes
+        acesso o metodo update da service, armazenando o resultado do metodo
+        retorna uma resposta em json
     */
     public function update(AtualizarCartoesRequest $request)
     {
@@ -55,12 +55,12 @@ class CartoesController extends Controller
     }
     
     /*
-        retorna uma resposta json de sucesso quando acessa o metodo update da service, e nao reclama de problema
+        deleta o cartao
 
-        metodo obrigado a validar pela request e receber uma $request (id)
-        crio uma variavel chamada cartoesService e nela armazeno a instancia da service de cartoes
-        na variavel cartoesServices acessos o metodo destroy da service e envio a $id (request) pro metodo na service
-        retorna um json apos o envio da $request pra service 
+        o metodo é obrigado a receber uma $request (id)
+        crio uma variavel chamada $cartoesService e nela armazeno o instancia da service de cartoes
+        na variavel cartoesServices acessos o resultado do metodo destroy
+        retorna uma resposta em json
     */
     public function destroy($id)
     {
@@ -70,11 +70,11 @@ class CartoesController extends Controller
     }
 
     /*
-        retorna o metodo showInvoice da service de CartoesService enviando um request
+        retorna o relatorio
 
-        metodo obrigado a validar pela request e receber uma $request
+        o metodo valida os campos atraves da request (PuxarRelatorioRequest) e é obrigado a receber uma $request 
         crio uma variavel chamada cartoesService e nela armazeno a instancia da service de cartoes
-        retorno a variavel cartoesService acessando o metodo showInvoice e enviando a $request
+        retorno a variavel cartoesService acesso o resultado do metodo showInvoice
     */
     public function viewInvoice(PuxarRelatorioRequest $request)
     {

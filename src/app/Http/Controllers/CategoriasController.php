@@ -8,11 +8,11 @@ use App\Services\CategoriasService;
 class CategoriasController extends Controller
 {
     /*
-        retorna a view index de categorias, enviando uma variavel a ela 
+        busca todas categorias
 
-        crio uma variavel chamada categoriasService e nela armazeno a instancia da service de categorias
-        crio uma variavel chamada categoria e nela armazeno a variavel categoriasService que esta acessando o metodo index da service
-        retorna a view index enviando a variavel categoria a ela  
+        crio uma variavel chamada $categoriasService e nela armazeno a instancia da service de categorias
+        crio uma variavel chamada $categoria e nela armazeno o resultado do metodo index da classe CategoriasService
+        retorna a view index enviando a variavel categoria a ela 
     */
     public function index()
     {
@@ -22,9 +22,9 @@ class CategoriasController extends Controller
     }
 
     /*
-        retorna a view criar
+        retorna uma pagina para a criacao de categorias
 
-        retorna a view criar
+        retorna a view criar, de categorias
     */
     public function create()
     {
@@ -32,11 +32,11 @@ class CategoriasController extends Controller
     }
 
     /*
-        retorna uma (redirect) redirecao, chamando a rota categories 
+        salvar uma nova categoria 
 
         o metodo valida os campos atraves da request (CriarAtualizarCategoriasRequest) e é obrigado a receber uma $request
-        crio uma variavel chamada categoriasService e nela armazeno a instancia da service de categorias
-        acesso o metodo store atraves da variavel categoriasService passando o request
+        instancio uma classe da categorias services
+        em categoriasService acesso o metodo store da service e envio a $request pro metodo na service
         retorno um redirect acessando a rota chamada categories
     */
     public function store(CriarAtualizarCategoriasRequest $request)
@@ -47,12 +47,13 @@ class CategoriasController extends Controller
     }
 
     /*
-        retorna um view chamada editar, enviando uma variavel a ela, 
+        retorna uma tela para editar a categoria
 
-        o metodo é obrigado a receber uma $request (id)
-        crio uma variavel chamada categoriasService e nela armazeno a instancia da service de categorias
-        crio uma variavel chamada categoria e nela armazeno a variavel categoriasService que esta acessando o metodo edit da service e recebendo o $request (id)
-        retorna a view editar enviando a variavel categoria a ela  
+        obrigatorio receber um parametro $id
+        instanciado a classe CategoriasService
+        crio uma variavel chamada $categoria e nela armazeno o resultado do metodo edit 
+        que foi chamado passando o id, da classe CategoriasService
+        retorna uma view passando a variavel categoria
     */
     public function edit($id)
     {
@@ -62,12 +63,12 @@ class CategoriasController extends Controller
     }
 
     /*
-        retorna uma (redirect) redirecao, chamando a rota categories
+        atualizo a categoria no banco de dados
 
-        o metodo valida os campos atraves da request (CriarAtualizarCategoriasRequest) e é obrigado a receber uma $request (id)
-        crio uma variavel chamada categoriasService e nela armazeno a instancia da service de categorias
-        acesso o metodo update atraves da variavel categoriasService passando o $request (id)
-        retorno um redirect acessando a rota chamada categories
+        o metodo valida os campos atraves da request (CriarAtualizarCategoriasRequest) e é obrigado a receber um $id 
+        crio uma variavel chamada $categoriasServices e nela armazeno a instancia da service de categorias
+        acesso o metodo update da service, armazenando o resultado do metodo
+        retorna um redirect acessando a rota chamada categories
     */
     public function update(CriarAtualizarCategoriasRequest $id)
     {
@@ -77,12 +78,12 @@ class CategoriasController extends Controller
     }
 
     /*
-        retorna uma (redirect) redirecao, chamando a rota categories  é obrigado a receber uma $request
-      
+        deleta a categoria
+
         o metodo é obrigado a receber uma $request (id)
-        crio uma variavel chamada categoriasService e nela armazeno a instancia da service de categorias
-        acesso o metodo destroy atraves da variavel categoriasService passando o $request (id)
-        retorno um redirect acessando a rota chamada categories
+        crio uma variavel chamada $categoriasService e nela armazeno o instancia da service de categorias
+        na variavel categoriasService acessos o resultado do metodo destroy
+        retorna um redirect acessando a rota chamada categories
     */
     public function destroy($id)
     {

@@ -12,11 +12,11 @@ use App\Services\ComprasService;
 class ComprasController extends Controller
 {
      /*
-        retorna a view lista, enviando uma variavel a ela 
+        buscando todos as compras 
 
-        crio uma variavel chamda comprasServices e nela armazeno a instancia da service de compras
-        crio uma variavel chamada compras e nela armazeno a variavel comprasServices que esta acessando o metodo index da service
-        retorna a view lista enviando a variavel compras a ela  
+        crio uma variavel chamada $comprasServices e nela armazeno a instancia da service de compras
+        crio uma variavel chamada $compras e nela armazeno o resultado do metodo index da classe ComprasService
+        retorna a view lista enviando a variavel compras a ela 
     */
     public function index()
     {
@@ -26,12 +26,13 @@ class ComprasController extends Controller
     }
 
     /*
-        retorn a view index, enviando um array com as variaveis pra ela
+        retorna uma pagina para a criacao de compras
 
-        crio uma variavel chamada cartoes e armazeno o resultado da tabela cartao
-        crio uma variavel chamada categorias e armazeno o resultado da tabela categoria
-        crio uma variavel chamada compras e armazeno o resultado da tabela compra
-        retorna a view chamada index enviando as variaveis a ela  
+        crio uma variavel chamada $cartoes e armazeno o resultado da model Cartao
+        crio uma variavel chamada $categorias e armazeno o resultado da model Categoria
+        crio uma variavel chamada $compras e armazeno o resultado da model Compra
+
+        retorna a view index enviando a variavel $cartoes, $categorias, $compras, a ela 
     */
     public function create()
     {
@@ -42,10 +43,11 @@ class ComprasController extends Controller
     }
     
     /*
-        retorna um (redirect) redirecao, chamando a rota /
+        salvar uma nova compra  
 
         o metodo valida os campos atraves da request (CriarComprasRequest) e é obrigado a receber uma $request
-        na variavel comprasServices acessos o metodo store da service e envio a $request pro metodo na service
+        instancio uma classe da ComprasService
+        em comprasServices acesso o metodo store da service e envio a $request pro metodo na service
         retorno um redirect acessando a rota chamada /
     */
     public function store(CriarComprasRequest $request)
@@ -56,23 +58,33 @@ class ComprasController extends Controller
     }
 
     /*
-        retorna o metodo edit, passando o $request (mas somente o id, pois o laravel entende que $id eu quero apenas o id) para a service
-        
-        crio uma variavel chamada comprasServices e nela armazeno a instancia da service de compras
-        retorna a varivel comprasServices acessando o metodo edit da service e envia o request pro metodo na service
+        retorna uma tela para editar a compra
+
+        obrigatorio receber um parametro $id
+        instanciado a classe ComprasService
+        crio uma variavel chamada $compra e nela armazeno o resultado do metodo edit 
+        que foi chamado passando o id, da classe ComprasService
+        retorno a view editar, passando um array com os indices que acessam a variavel $compra e acessa o indice do array,     
     */
     public function edit($id)
     {
         $comprasServices = new ComprasService();
-        return $comprasServices->edit($id);
+        $compra = $comprasServices->edit($id);   
+        
+        return view('compras.editar', [
+                    'compra' => $compra['compra'],
+                    'categorias' => $compra['categorias'],
+                    'cartoes' => $compra['cartoes']
+        ]);     
     }
 
     /*
-        retorna um (redirect) redirecao, chamando a rota /
+        atualizo a compra no banco de dados
 
-        o metodo valida os campos atraves da request (AtualizarComprasRequest) e é obrigado a receber uma $request (id)
-        na variavel comprasServices acessa o metodo update da service e envia a $request (id) pro metodo na service
-        retorno um redirect acessando a rota chamada /
+        o metodo valida os campos atraves da request (AtualizarComprasRequest) e é obrigado a receber um $id 
+        crio uma variavel chamada $comprasServices e nela armazeno a instancia da service de compras
+        acesso o metodo update da service, armazenando o resultado do metodo
+        retorna um redirect acessando a rota chamada /
     */
     public function update(AtualizarComprasRequest $id)
     {
@@ -82,12 +94,12 @@ class ComprasController extends Controller
     }
 
     /*
-        retorna um (redirect) redirecao, chamando a rota /
+        deleta a compra
 
         o metodo é obrigado a receber uma $request (id)
-        crio uma variavel chamada comprasServices e nela armazeno a instancia da service de compras
-        na variavel comprasServices acessa o metodo update da service e envia a $request (id) pro metodo na service
-        retorno um redirect acessando a rota chamado /
+        crio uma variavel chamada $comprasServices e nela armazeno o instancia da service de compras
+        na variavel comprasServices acessos o resultado do metodo destroy
+        retorna um redirect acessando a rota chamada /
     */
     public function destroy($id)
     {

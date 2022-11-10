@@ -36,7 +36,7 @@ class CartoesController extends Controller
     }
 
     /*
-        salvar um novo cartao 
+        salva um novo cartao 
 
         o metodo valida os campos atraves da request (CriarCartoesRequest) e é obrigado a receber uma $request
         instancio uma classe da cartoes services

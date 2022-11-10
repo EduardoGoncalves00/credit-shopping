@@ -46,11 +46,10 @@ class CartoesService
     }
 
     /*
-        retorna para a view a variavel cartao. a variavel armazena, a busca na model, pelo id passado na $request e devolve o resultado do banco
+        retorna um cartao 
 
         o metodo e obrigado a receber uma $request (id)
-        a variavel $cartao aramazena o resultado, da busca na model por um id especifico, que é o id passado na $request
-        retorna para a view a variavel $cartao
+        retorna a procura no banco pelo id passado na request
     */
     public function edit($id)
     {

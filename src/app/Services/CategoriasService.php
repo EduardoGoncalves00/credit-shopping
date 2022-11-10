@@ -10,8 +10,9 @@ class CategoriasService
     /*
         o metodo retorna todas as categorias. caso withTrashed for true devolve as apagadas tambem
 
-        o metodo tem a variavel withTrashed com valor false
-        ele faz um if, caso a variavel esteja false ele retorna todas as categorias, mas caso seja true ele retornarar todas as categorias juntamente com as deletadas
+        o metodo tem o parametro withTrashed com valor padrao false
+        ele faz um if, caso a variavel esteja true ele retorna todas as categorias inclusive as deletadas, 
+        mas caso seja false ele retornarar apenas as categorias nao deletadas
     */
     public function index($withTrashed = false)
     {
@@ -23,12 +24,13 @@ class CategoriasService
     }  
 
     /*
-        salva no banco os resultados enviados pela request
-
-        o metodo e obrigatorio uma request e possui uma request para validacao
-        a variavel $categoria é instanciada, virando a model categoria
-        na variavel é chamada a coluna nome do banco, onde vai ser armazenado o request com a propriedade chamada nome
-        e chamado o metodo save, onde vai salvar essas informacoes imputadas no banco
+        salva no banco os dados enviados para esses metodos
+        
+        o metodo valida os campos atraves da request (CriarAtualizarCategoriasRequest)
+        o metodo tem um parametro obrigatório $request
+        a classe Categoria é instanciada, armazenando na variavel $categoria
+        armazena na propriedade nome, o conteudo que foi enviado no campo nome da $request
+        chamado o metodo save, onde vai salvar essas informacoes imputadas no banco
     */
     public function store(CriarAtualizarCategoriasRequest $request)
     {
@@ -38,10 +40,10 @@ class CategoriasService
     }
 
     /*
-        retorna a busca na model, pelo id passado na $request e devolve o resultado do banco
+        retorna uma categoria 
 
         o metodo e obrigado a receber uma $request (id)
-        retorna a busca na model por um id especifico, que é o id passado na $request
+        retorna a procura no banco pelo id passado na request
     */
     public function edit($id)
     {
@@ -51,8 +53,9 @@ class CategoriasService
     /*
         atualiza o conteudo no banco, conforme o id recebido
 
-        o metodo e obrigado a receber uma $request (id)
-        recebe o $request passado. procura no banco pelo id passado na request, atualiza no banco com todas as infos passadas no $request
+        o metodo e obrigado a receber uma $request
+        recebe o $request passado, procura no banco pelo id passado na request
+        atualiza no banco com todas as propriedades passadas pelo $request
     */
     public function update($request)
     {
@@ -62,8 +65,9 @@ class CategoriasService
     /*
         deleta o conteudo no banco, conforme o id recebido
 
-        o metodo e obrigado a receber uma $request (id)
-        recebe o id passado na request, procura no banco por um igual e deleta ele do banco
+        o metodo e obrigado a receber um $id
+        armazena na variavel $categoria, que recebe o id passado por parametro, procura no banco por um igual e deleta ele do banco
+        retorna a variavel $categoria
     */
     public function destroy($id)
     {

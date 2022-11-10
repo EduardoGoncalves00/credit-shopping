@@ -10,10 +10,10 @@ use App\Services\ComprasService;
 class ComprasController extends Controller
 {
     /*
-        retorna o metodo index da ComprasService
+        busca todas as compras
 
-        crio uma variavel chamda comprasServices e nela armazeno a instancia da service de compras
-        crio uma variavel chamada compras e nela armazeno a variavel comprasServices que esta acessando o metodo index da service
+        crio uma variavel chamada $comprasServices e nela armazeno a instancia da service de compras
+        crio uma variavel chamada $compras e nela armazeno o resultado do metodo index da classe ComprasService
         retorno a variavel compras
     */
     public function index()
@@ -24,11 +24,12 @@ class ComprasController extends Controller
     }
 
     /*
-        retorna uma resposta json de sucesso quando acessa o metodo store da service, e nao reclama de problema
+        salva uma nova compra 
 
-        metodo obrigado a validar pela request e receber uma $request
-        na variavel comprasServices acessos o metodo store da service e envio a $request pro metodo na service
-        retorna um json apos o envio da $request pra service 
+        o metodo valida os campos atraves da request (CriarComprasRequest) e é obrigado a receber uma $request
+        instancio uma classe da ComprasService
+        em $comprasServices acesso o metodo store da service e envio a $request pro metodo na service
+        retorna uma resposta em json
     */
     public function store(CriarComprasRequest $request)
     {
@@ -38,11 +39,12 @@ class ComprasController extends Controller
     }
 
      /*
-        retorna uma resposta json de sucesso quando acessa o metodo update da service, e nao reclama de problema
+        atualizo a compra no banco de dados
 
-        metodo obrigado a validar pela request e receber uma $request
-        na variavel comprasServices acessos o metodo update da service e envio a $request pro metodo na service
-        retorna um json apos o envio da $request pra service 
+        o metodo valida os campos atraves da request (AtualizarComprasRequest) e é obrigado a receber uma $request 
+        crio uma variavel chamada $comprasServices e nela armazeno a instancia da service de compras
+        acesso o metodo update da service, armazenando o resultado do metodo
+        retorna uma resposta em json
     */
     public function update(AtualizarComprasRequest $request)
     {
@@ -52,11 +54,12 @@ class ComprasController extends Controller
     }
 
     /*
-        retorna uma resposta json de sucesso quando acessa o metodo detroy da service, e nao reclama de problema
+        deleta a compra
 
-        metodo e obrigado a receber um id ($request)
-        na variavel categoriasService acessos o metodo destroy da service e envio a $request pro metodo na service
-        retorna um json apos o envio da $request pra service
+        o metodo é obrigado a receber uma $request (id)
+        crio uma variavel chamada $comprasServices e nela armazeno o instancia da service de compras
+        na variavel $comprasServices acesso o resultado do metodo destroy
+        retorna uma resposta em json
     */
     public function destroy($id)
     {
