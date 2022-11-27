@@ -7,6 +7,7 @@ use App\Http\Requests\CriarComprasRequest;
 use App\Models\Cartao;
 use App\Models\Categoria;
 use App\Models\Compra;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class ComprasService
@@ -42,16 +43,29 @@ class ComprasService
     public function store(CriarComprasRequest $request)
     {
         $id = Auth::user()->id;
+        $x = 1;
 
-        $compra = new Compra;
-        $compra->id_logado = $id;
-        $compra->descricao = $request->input('descricao');
-        $compra->categoria_id = $request->input('categoria_id');
-        $compra->valor = $request->input('valor');
-        $compra->cartao_id = $request->input('cartao_id');
-        $compra->data = $request->input('data');
-        $compra->usuario = $request->input('usuario');
-        $compra->save();
+        while($x <= $request->parcela) {
+
+            $compra = new Compra;
+            $compra->id_logado = $id;
+            $compra->descricao = $request->input('descricao');
+            $compra->categoria_id = $request->input('categoria_id');
+            $compra->valor = $request->valor / $request->parcela;
+            $compra->parcela = "$x / $request->parcela";
+            $compra->cartao_id = $request->input('cartao_id');
+
+            if ($x > 1) {
+                $data = Carbon::createFromFormat('Y-m-d', $request->data)->addMonth(1, $x);
+                $compra->data = $data;
+            } else {$compra->data = $request->input('data');
+            }
+
+            $compra->usuario = $request->input('usuario');
+            $compra->save();
+
+            $x++; // mesma coisa $x = $x + 1; 
+        }  
     }
 
     /*

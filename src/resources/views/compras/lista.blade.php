@@ -13,6 +13,7 @@
                 <th scope="col">Descricão</th>
                 <th scope="col">Categoria</th>
                 <th scope="col">Valor</th>
+                <th scope="col">Parcela</th>
                 <th scope="col">Cartão</th>
                 <th scope="col">Data</th>
                 <th scope="col">Nome do comprador</th>
@@ -26,6 +27,7 @@
                     <td>{{ $compra->descricao }}</td>
                     <td>{{ $compra->categoria->nome }}</td>
                     <td>{{ $compra->valor }}</td>
+                    <td>{{ $compra->parcela }}</td>
                     <td>{{ $compra->cartao->nome}}</td>
                     <td>{{ $compra->data->format('d/m/y') }}</td>
                     <td>{{ $compra->usuario }}</td>

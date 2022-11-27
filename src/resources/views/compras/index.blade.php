@@ -45,6 +45,16 @@
             </div>
 
             <div class="form-group">
+                <label for="parcela" >Numero de parcelas</label>
+                <input type="decimal" class="form-control @error('parcela') is-invalid @enderror" name="parcela" placeholder="06">
+                @error('parcela')
+                <div class="invalid-feedaback text-danger">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
+
+            <div class="form-group">
                 <label for="cartao_id" >Selecione o cartão</label>
                 <select class="form-control @error('cartao_id') is-invalid @enderror" name="cartao_id">
                     <option disabled value="">Cartão</option>
