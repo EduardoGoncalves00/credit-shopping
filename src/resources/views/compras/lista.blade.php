@@ -26,7 +26,7 @@
                 <tr>
                     <td>{{ $compra->descricao }}</td>
                     <td>{{ $compra->categoria->nome }}</td>
-                    <td>{{ $compra->valor }}</td>
+                    <td>R$ {{number_format($compra->valor,2,",",".")}}</td>
                     <td>{{ $compra->parcela }}</td>
                     <td>{{ $compra->cartao->nome}}</td>
                     <td>{{ $compra->data->format('d/m/y') }}</td>
