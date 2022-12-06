@@ -46,7 +46,7 @@
 
             <div class="form-group">
                 <label for="parcela" >Numero de parcelas</label>
-                <input type="decimal" class="form-control @error('parcela') is-invalid @enderror" name="parcela" placeholder="06">
+                <input type="decimal" class="form-control @error('parcela') is-invalid @enderror" name="parcela" placeholder="01">
                 @error('parcela')
                 <div class="invalid-feedaback text-danger">
                     {{$message}}
