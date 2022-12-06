@@ -16,6 +16,7 @@
                 <th scope="col">Descricão</th>
                 <th scope="col">Categoria</th>
                 <th scope="col">Valor</th>
+                <th scope="col">Parcela</th>
                 <th scope="col">Cartão</th>
                 <th scope="col">Data</th>
                 <th scope="col">Nome do comprador</th>
@@ -28,6 +29,7 @@
                     <td>{{ $faturaPuxada->descricao }}</td>
                     <td>{{ $faturaPuxada->categoria->nome }}</td>
                     <td>R$ {{number_format($faturaPuxada->valor,2,",",".")}}</td>
+                    <td>{{ $faturaPuxada->parcela }}</td>
                     <td>{{ $faturaPuxada->cartao->nome }}</td>
                     <td>{{ $faturaPuxada->data->format('d/m/y') }}</td>
                     <td>{{ $faturaPuxada->usuario }}</td>
