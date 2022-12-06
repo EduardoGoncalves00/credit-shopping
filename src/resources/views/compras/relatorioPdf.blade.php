@@ -6,7 +6,7 @@
     <div class="invalid-feedaback text-danger">
         <h4 class="card-title text-center">Fatura do mes: {{$somenteMesAtualSelecionado}}</h4>  
         <h4 class="card-title text-center">Vencimento no dia: {{$diaPagamento}}</h4> 
-        <h4 class="card-title text-center">Valor total da fatura: R$ {{$totalFatura}}</h4>      
+        <h4 class="card-title text-center">Valor total da fatura: R$ {{number_format($totalFatura,2,",",".")}}</h4>      
     </div>
 
     <table class="container table table-bordered">
@@ -27,7 +27,7 @@
                 <tr>
                     <td>{{ $faturaPuxada->descricao }}</td>
                     <td>{{ $faturaPuxada->categoria->nome }}</td>
-                    <td>{{ $faturaPuxada->valor }}</td>
+                    <td>R$ {{number_format($faturaPuxada->valor,2,",",".")}}</td>
                     <td>{{ $faturaPuxada->cartao->nome }}</td>
                     <td>{{ $faturaPuxada->data->format('d/m/y') }}</td>
                     <td>{{ $faturaPuxada->usuario }}</td>
