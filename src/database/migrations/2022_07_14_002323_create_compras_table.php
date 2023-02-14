@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
+            $table->string('compra_id');
             $table->unsignedBigInteger('id_logado');
             $table->unsignedBigInteger('categoria_id');
             $table->unsignedBigInteger('cartao_id');
