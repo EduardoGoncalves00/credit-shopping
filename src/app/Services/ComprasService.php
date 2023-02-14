@@ -116,7 +116,9 @@ class ComprasService
     */
     public function destroy($id)
     {
-        $compras = Compra::findOrFail($id)->delete();
-        return $compras;
+        $compra = Compra::where('id', $id)->get();
+        foreach ($compra as $id) {
+            Compra::where('compra_id', $id->compra_id)->delete();
+        }
     }
 }
