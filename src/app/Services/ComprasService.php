@@ -44,28 +44,30 @@ class ComprasService
     {
         $id = Auth::user()->id;
         $x = 1;
+        $rand = rand();
 
-        while($x <= $request->parcela) {
+        while ($x <= $request->parcela) {
 
             $compra = new Compra;
+            $compra->compra_id = $rand;
             $compra->id_logado = $id;
-            $compra->descricao = $request->input('descricao');
             $compra->categoria_id = $request->input('categoria_id');
+            $compra->cartao_id = $request->input('cartao_id');
+            $compra->descricao = $request->input('descricao');
             $compra->valor = $request->valor / $request->parcela;
             $compra->parcela = "$x / $request->parcela";
-            $compra->cartao_id = $request->input('cartao_id');
-
-            if ($x > 1) {
-                $data = Carbon::createFromFormat('Y-m-d', $request->data)->addMonth(1, $x);
+            if ($request->parcela > 1) {
+                $data = Carbon::createFromFormat('Y-m-d', $request->data);
+                $data->addMonth($x, 1);
                 $compra->data = $data;
-            } else {$compra->data = $request->input('data');
+            } else {
+                $compra->data = $request->input('data');
             }
-
             $compra->usuario = $request->input('usuario');
             $compra->save();
 
             $x++; // mesma coisa $x = $x + 1; 
-        }  
+        }
     }
 
     /*
@@ -84,13 +86,13 @@ class ComprasService
         $cartoes = Cartao::all();
 
         return [
-            'compra'=> $compra, 
-            'categorias'=> $categorias, 
-            'cartoes'=> $cartoes
+            'compra' => $compra,
+            'categorias' => $categorias,
+            'cartoes' => $cartoes
         ];
     }
 
-     /*
+    /*
         atualiza o conteudo no banco, conforme o id recebido
 
         o metodo valida os campos atraves da request (AtualizarComprasRequest)
