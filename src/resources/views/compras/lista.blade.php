@@ -19,7 +19,7 @@
                 <th scope="col">Nome do comprador</th>
                 <th class="text-center" scope="col">Atualizar</th>
                 <th class="text-center" scope="col">Deletar</th>
-                <th class="text-center" scope="col">Estorno</th>
+                {{-- <th class="text-center" scope="col">Estorno</th> --}}
             </tr>
         </thead>
         <tbody>
@@ -46,11 +46,11 @@
                             </svg>
                         </a>
                     </td>
-                    <td>
+                    {{-- <td>
                         <a  href= '{{ route('reversal_compras', $compra->id) }}'>
-                            <span><a href="#" class="text-dark">Solicitar</a></span>
+                            Solicitar
                         </a>
-                    </td>
+                    </td> --}}
                 </tr>
         </tbody>
             @empty

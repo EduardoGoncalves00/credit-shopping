@@ -44,6 +44,7 @@ Route::controller(ComprasController::class)->middleware(['auth'])->group(functio
     Route::get('/show_edit_shopping/{id}', 'edit')->name('show_edit_shopping');
     Route::put('/update_shopping/{id}', 'update')->name('update_shopping');
     Route::get('/destroy_compras/{id}', 'destroy')->name('destroy_compras');
+    Route::get('/reversal_compras/{id}', 'reversal')->name('reversal_compras');
 });
 
 require __DIR__.'/auth.php';

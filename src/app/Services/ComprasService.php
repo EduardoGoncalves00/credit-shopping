@@ -9,6 +9,7 @@ use App\Models\Categoria;
 use App\Models\Compra;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ComprasService
 {
@@ -44,7 +45,9 @@ class ComprasService
     {
         $id = Auth::user()->id;
         $x = 1;
-        $rand = rand();
+        $numbers = range(1, 999999);
+        shuffle($numbers); 
+        $rand = $numbers[0];
 
         while ($x <= $request->parcela) {
 
@@ -119,6 +122,20 @@ class ComprasService
         $compra = Compra::where('id', $id)->get();
         foreach ($compra as $id) {
             Compra::where('compra_id', $id->compra_id)->delete();
+        }
+    }
+
+    public function reversal($id)
+    {
+        $compra = Compra::where('id', $id)->get();
+        
+        foreach ($compra as $id) {
+
+            $valorEstorno = Compra::where('compra_id', $id->compra_id)->sum('valor');
+
+            $adicionaEstornoCartao = Cartao::where('id', $id->cartao_id)->update(['valor_estorno' => DB::raw('valor_estorno +' . $valorEstorno)]);
+
+            $deletaCompra = Compra::where('compra_id', $id->compra_id)->delete();
         }
     }
 }

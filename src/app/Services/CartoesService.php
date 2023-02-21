@@ -41,6 +41,7 @@ class CartoesService
         $cartao->nome = $request->input('nome');
         $cartao->dia_pagamento = $request->input('dia_pagamento');
         $cartao->dia_fechamento = $request->input('dia_fechamento');
+        $cartao->valor_estorno = 0;
         $cartao->banco = $request->input('banco');
         $cartao->save();
     }
